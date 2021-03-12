@@ -1,5 +1,3 @@
-
-
 public class Vraag {
     private String vraag;
     private String antwoord;
