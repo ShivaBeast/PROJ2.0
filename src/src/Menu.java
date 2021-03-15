@@ -10,7 +10,7 @@ class Menu {
     Scanner reader = new Scanner(System.in);
 
 
-    public void showMenu(){
+    public void showMenu() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("1. Lijst met examens ");
@@ -27,7 +27,7 @@ class Menu {
 
     }
 
-    public void getChoice(Integer keuze){
+    public void getChoice(Integer keuze) {
         switch (keuze) {
             case 1:
                 System.out.println("Lijst examens");
@@ -39,7 +39,7 @@ class Menu {
                 studentInschrijven();
                 break;
             case 4:
-//                studentUitschrijven();
+                studentUitschrijven();
                 break;
             case 5:
                 System.out.println("damn bruh");
@@ -51,24 +51,25 @@ class Menu {
                 System.out.println("exit");
                 break;
             default:
-                System.out.println("Bruh "+keuze +" bestaad niet, voer iets ander in man.");
+                System.out.println("Bruh " + keuze + " bestaad niet, voer iets ander in man.");
 
         }
     }
 
-    public ArrayList<Examen> getExams(){
+    public ArrayList<Examen> getExams() {
         return null;
 
     }
 
-    public ArrayList<Student> getStudents(){
+    public ArrayList<Student> getStudents() {
         return null;
 
     }
 
-    public void studentInschrijven(){
+    public void studentInschrijven() {
 
         for (int i = 0; i < 2500; i++) {
+            System.out.println("Vul uw studentnummer in");
             String studentNummer = reader.nextLine();
 
             // TODO : studentNummer <= 8
@@ -79,14 +80,19 @@ class Menu {
 
                 StudentenLijst.add(studentNummer + " " + studentNaam);
                 System.out.println(studentNaam + ", U bent succesvol ingeschreven.");
+                this.showMenu();
+                break;
+
             } else {
                 System.out.println("Dit studentennummer is al ingeschreven, probeer het opnieuw.");
             }
         }
     }
 
+
     public void studentUitschrijven(){
 
+        System.out.println("Vul uw studentnummer in");
         String studentNummer = reader.nextLine();
 
         for (int i = 0; i < StudentenLijst.size(); i++) {
