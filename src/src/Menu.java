@@ -6,7 +6,7 @@ class Menu {
     String opties[];
     Examen examen[];
     Student student[];
-    ArrayList<String> StudentenLijst = new ArrayList<>();
+    public static ArrayList<String> StudentenLijst = new ArrayList<>();
     Scanner reader = new Scanner(System.in);
 
 
@@ -15,7 +15,7 @@ class Menu {
 
         System.out.println("1. Lijst met examens ");
         System.out.println("2. Lijst met studenten ");
-        System.out.println("3. Nieuwe student inschrijven ");
+        System.out.println("3. Student inschrijven ");
         System.out.println("4. Student Uitschrijven ");
         System.out.println("5. Welke examens heeft student gehaald? ");
         System.out.println("6. Welke student heeft de meeste examens gehaald?");
@@ -73,12 +73,13 @@ class Menu {
             String studentNummer = reader.nextLine();
 
             // TODO : studentNummer <= 8
+            // TODO : Opslaan naam bij studentnummer
 
             if (!StudentenLijst.contains(studentNummer)) {
                 System.out.println("Vul uw naam in");
                 String studentNaam = reader.nextLine();
 
-                StudentenLijst.add(studentNummer + " " + studentNaam);
+                StudentenLijst.add(studentNummer);
                 System.out.println(studentNaam + ", U bent succesvol ingeschreven.");
                 this.showMenu();
                 break;
@@ -94,7 +95,6 @@ class Menu {
 
         System.out.println("Vul uw studentnummer in");
         String studentNummer = reader.nextLine();
-        StudentenLijst.add("23"); // Check, can be removed later
 
         for (int i = 0; i < StudentenLijst.size(); i++) {
             while (StudentenLijst.get(i).equals(studentNummer)) {
