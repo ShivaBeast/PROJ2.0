@@ -94,16 +94,20 @@ class Menu {
 
         System.out.println("Vul uw studentnummer in");
         String studentNummer = reader.nextLine();
+        StudentenLijst.add("23"); // Check, can be removed later
 
         for (int i = 0; i < StudentenLijst.size(); i++) {
             while (StudentenLijst.get(i).equals(studentNummer)) {
                 StudentenLijst.remove(i);
                 System.out.println("U bent succesvol uitgeschreven");
                 System.out.println(StudentenLijst); // Check, can be removed later
+                this.showMenu();
+
             }
         }
         if (!StudentenLijst.contains(studentNummer)) {
             System.out.println("U was niet ingeschreven");
+            this.showMenu();
         }
     }
 }
