@@ -6,7 +6,7 @@ class Menu {
     String opties[];
     Examen examen[];
     Student student[];
-    ArrayList<String> StudentenLijst = new ArrayList<String>();
+    ArrayList<String> StudentenLijst = new ArrayList<>();
     Scanner reader = new Scanner(System.in);
 
 
@@ -71,22 +71,35 @@ class Menu {
         for (int i = 0; i < 2500; i++) {
             String studentNummer = reader.nextLine();
 
+            // TODO : studentNummer <= 8
+
             if (!StudentenLijst.contains(studentNummer)) {
                 System.out.println("Vul uw naam in");
                 String studentNaam = reader.nextLine();
 
                 StudentenLijst.add(studentNummer + " " + studentNaam);
-                System.out.println("U bent succesvol ingeschreven.");
+                System.out.println(studentNaam + ", U bent succesvol ingeschreven.");
             } else {
-                System.out.println("Deze studenten nummer is al in gebruik, probeer het opnieuw.");
+                System.out.println("Dit studentennummer is al ingeschreven, probeer het opnieuw.");
             }
         }
     }
 
     public void studentUitschrijven(){
 
-    }
+        String studentNummer = reader.nextLine();
 
+        for (int i = 0; i < StudentenLijst.size(); i++) {
+            while (StudentenLijst.get(i).equals(studentNummer)) {
+                StudentenLijst.remove(i);
+                System.out.println("U bent succesvol uitgeschreven");
+                System.out.println(StudentenLijst); // Check, can be removed later
+            }
+        }
+        if (!StudentenLijst.contains(studentNummer)) {
+            System.out.println("U was niet ingeschreven");
+        }
+    }
 }
 
 class Examen{
