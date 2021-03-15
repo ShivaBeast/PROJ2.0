@@ -1,11 +1,3 @@
-/**
- * Best.naam:   Examen.java
- * Auteur:      Pitt Khotchada
- * St.nummer:   19117884
- * Groep:       6C
- * Aangepast:   11-03
- */
-
 import java.util.ArrayList;
 
 public class Examen {
