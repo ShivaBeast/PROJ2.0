@@ -1,5 +1,4 @@
-public class test {
-    public class Feedback {
+public class Feedback {
 
         private Integer cijfer1;
         private Integer cijfer2;
@@ -35,4 +34,3 @@ public class test {
             }
         }
     }
-}
