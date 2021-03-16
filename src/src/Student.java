@@ -18,7 +18,7 @@ public class Student {
         return this.studentNummer;
     }
 
-    public void inloggen(){
+    public void inloggen() {
         Scanner scanner = new Scanner(System.in);
         this.name = scanner.nextLine();
         while(studentNummer.length() <= 0 || studentNummer.length() > 8){

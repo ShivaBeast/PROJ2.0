@@ -31,6 +31,14 @@ public class Examen {
     }
 
     /**
+     * Setter voor naam.
+     * @param naam - naam
+     */
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
+    /**
      * Getter voor geslaagd.
      * @return boolean geslaagd
      */
@@ -55,6 +63,14 @@ public class Examen {
     }
 
     /**
+     * Setter voor voldoendeBij.
+     * @param voldoende - Aantal punten waarbij een student een voldoende heeft.
+     */
+    public void setVoldoendeBij(int voldoende) {
+        voldoendeBij = voldoende;
+    }
+
+    /**
      * Getter voor tijdOmTeMaken.
      * @return int tijdOmTeMaken
      */
@@ -63,11 +79,27 @@ public class Examen {
     }
 
     /**
+     * Setter voor tijdOmTeMaken.
+     * @param tijd - Hoeveelheid tijd om een examen te maken.
+     */
+    public void setTijdOmTeMaken(int tijd) {
+        tijdOmTeMaken = tijd;
+    }
+
+    /**
      * Getter voor vragen.
      * @return ArrayList<Vraag> vragen
      */
     public ArrayList<Vraag> getVragen() {
         return vragen;
+    }
+
+    /**
+     * Setter voor vragen.
+     * @param vragen - Een vragenlijst.
+     */
+    public void setVragen(ArrayList<Vraag> vragen) {
+        this.vragen = vragen;
     }
 
     /**
