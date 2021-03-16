@@ -28,7 +28,6 @@ public class Main {
         return open;
     }
 
-
     public static ArrayList<Vraag> MCVragen(){
         ArrayList<Vraag> mc = new ArrayList<>();
 
