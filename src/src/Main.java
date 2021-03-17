@@ -1,16 +1,12 @@
-// Hallo test test.
-
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Examen examen = new Examen("Biologie", vragen(), 55, 90);
-        System.out.println(examen.getVragen().get(0).getVraag());
-        System.out.println(examen.getVragen().get(0).getAntwoord());
+        Scanner scanner = new Scanner(System.in);
 
-        Examen examen2 = new Examen("Gym", vragen(), 55, 90);
-        System.out.println(examen.getVragen().get(1).getVraag());
-        System.out.println(examen.getVragen().get(1).getAntwoord());
+        Menu menu1 = new Menu();
+        menu1.showMenu();
     }
 
     public static ArrayList<Vraag> vragen() {
@@ -30,20 +26,19 @@ public class Main {
         return open;
     }
 
-    public static ArrayList<Vraag> MCVragen(){
+    public static ArrayList<Vraag> MCVragen() {
         ArrayList<Vraag> mc = new ArrayList<>();
 
-        mc.add(new Vraag(1,"Waar staat HTML voor?",'A', 10));
-        mc.add(new Vraag(2,"Welke smartphone bedrijf behoort niet tot China?",'B', 10));
-        mc.add(new Vraag(3,"Welke code is correct?", 'B', 10));
+        mc.add(new Vraag(1, "Waar staat HTML voor?", 'A', 10));
+        mc.add(new Vraag(2, "Welke smartphone bedrijf behoort niet tot China?", 'B', 10));
+        mc.add(new Vraag(3, "Welke code is correct?", 'B', 10));
         mc.add(new Vraag(4, "Wat is de functie van de Scrum Master?", 'A', 10));
-        mc.add(new Vraag(5,"Welke van de 4 methoden is de constructor?",'C', 10));
-        mc.add(new Vraag(6,"Welk land werd de 1e die wiet legaliseerde?",'C', 10));
-        mc.add(new Vraag(7,"Welke programmeertaal wordt gebruikt voor het bouwen van een website?",'C', 10));
-        mc.add(new Vraag(8,"Welk land behoort niet tot Zuid-Amerika?",'D', 10));
-        mc.add(new Vraag(9,"Wie heeft de wereldrecord als de snelste man ter wereld?",'B', 10));
-        mc.add(new Vraag(10,"Hoe heet de zoon van god?", 'A', 10));
+        mc.add(new Vraag(5, "Welke van de 4 methoden is de constructor?", 'C', 10));
+        mc.add(new Vraag(6, "Welk land werd de 1e die wiet legaliseerde?", 'C', 10));
+        mc.add(new Vraag(7, "Welke programmeertaal wordt gebruikt voor het bouwen van een website?", 'C', 10));
+        mc.add(new Vraag(8, "Welk land behoort niet tot Zuid-Amerika?", 'D', 10));
+        mc.add(new Vraag(9, "Wie heeft de wereldrecord als de snelste man ter wereld?", 'B', 10));
+        mc.add(new Vraag(10, "Hoe heet de zoon van god?", 'A', 10));
 
         return mc;
     }
-}
