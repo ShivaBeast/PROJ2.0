@@ -87,20 +87,35 @@ class Menu {
         this.showMenu();
     }
 
+
+
     public void studentInschrijven() {
 
         for (int i = 0; i < 2500; i++) {
             System.out.println("Vul uw studentnummer in");
             String studentNummer = reader.nextLine();
 
+            while (studentNummer.matches("^[a-zA-Z]+$")) {
+                System.out.println("Vul uw studentnummer in");
+                studentNummer = reader.next();
+            }
+
+
+
             // TODO : studentNummer <= 8
-            // TODO : Opslaan naam bij studentnummer
 
             if (!StudentenLijst.contains(studentNummer)) {
                 System.out.println("Vul uw naam in");
+
                 String studentNaam = reader.nextLine();
 
-                StudentenLijst.add(studentNummer);
+                while (!studentNaam.matches("^[a-zA-Z]+$")) {
+                    System.out.println("Vul uw naam in");
+                    studentNaam = reader.next();
+                }
+
+
+                StudentenLijst.add(studentNummer + " " + studentNaam);
                 System.out.println(studentNaam + ", U bent succesvol ingeschreven.");
                 this.showMenu();
                 break;
@@ -116,9 +131,9 @@ class Menu {
         String studentNummer = reader.nextLine();
 
         for (int i = 0; i < StudentenLijst.size(); i++) {
-            while (StudentenLijst.get(i).equals(studentNummer)) {
+            while (!StudentenLijst.contains(studentNummer)) {
+                System.out.println(StudentenLijst.get(i) + ", U bent succesvol uitgeschreven.");
                 StudentenLijst.remove(i);
-                System.out.println("U bent succesvol uitgeschreven");
                 System.out.println(StudentenLijst); // Check, can be removed later
                 this.showMenu();
 
@@ -127,6 +142,7 @@ class Menu {
         if (!StudentenLijst.contains(studentNummer)) {
             System.out.println("U was niet ingeschreven");
             this.showMenu();
+
         }
     }
 }
