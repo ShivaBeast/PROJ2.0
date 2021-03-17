@@ -1,78 +1,94 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Menu {
+class Menu {
 
-    private String opties[];
-    private Student student[];
-
+    public static Boolean firstRun = true;
     public static ArrayList<String> StudentenLijst = new ArrayList<>();
     Scanner reader = new Scanner(System.in);
 
+
+    //Deze methode toont het menu
     public void showMenu() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("1. Lijst met examens");
-        System.out.println("2. Lijst met studenten");
-        System.out.println("3. Student inschrijven");
-        System.out.println("4. Student Uitschrijven");
-        System.out.println("5. Welke examens heeft student gehaald?");
-        System.out.println("6. Welke student heeft de meeste examens gehaald?");
-        System.out.println("7. Exit");
-        System.out.print("Voer je keuze in: ");
-
-        Integer invoer = scanner.nextInt();
-        while (invoer != 7) {
-            getChoice(invoer);
-            System.out.print("\nVoer je keuze in: ");
-            invoer = scanner.nextInt();
+        if(!firstRun){
+            System.out.println("\n\nDruk op een toets om door te gaan...");
+            reader.nextLine();
+            System.out.println("\n\n\n\n\n\n\n\n\n");
         }
-        System.out.println("Exit");
+        firstRun = false;
+
+        //ASCII text source: https://fsymbols.com/generators/carty/
+        System.out.println("\n" +
+            "░█─░█ █▀▀█ █▀▀█ █▀▀▀ █▀▀ █▀▀ 　 ░█─░█ █▀▀█ █▀▀▀ █▀▀ 　 ░█▀▀▀█ █▀▀ █──█ █▀▀█ █▀▀█ █── \n" +
+            "░█▀▀█ █▄▄█ █▄▄█ █─▀█ ▀▀█ █▀▀ 　 ░█▀▀█ █──█ █─▀█ █▀▀ 　 ─▀▀▀▄▄ █── █▀▀█ █──█ █──█ █── \n" +
+            "░█─░█ ▀──▀ ▀──▀ ▀▀▀▀ ▀▀▀ ▀▀▀ 　 ░█─░█ ▀▀▀▀ ▀▀▀▀ ▀▀▀ 　 ░█▄▄▄█ ▀▀▀ ▀──▀ ▀▀▀▀ ▀▀▀▀ ▀▀▀");
+        System.out.println("1. Lijst met examens ");
+        System.out.println("2. Lijst met studenten ");
+        System.out.println("3. Student inschrijven ");
+        System.out.println("4. Student Uitschrijven ");
+        System.out.println("5. Welke examens heeft student gehaald? ");
+        System.out.println("6. Welke student heeft de meeste examens gehaald?");
+        System.out.println("7. Examen afnemen ");
+        System.out.println("8. Exit");
+        System.out.println("Voer je keuze in:");
+        String invoer = reader.nextLine();
+        getChoice(invoer);
     }
 
-    public void getChoice(Integer keuze) {
+    //Deze methode verkrijgt de invoer van de gebruiker en stuurt hem in het volgende scherm
+    public void getChoice(String keuze) {
         switch (keuze) {
-            case 1:
-                System.out.println("Lijst met de examens.");
-                getExamens();
+            case "1":
+                getExams();
                 break;
-            case 2:
-                System.out.println("Lijst studenten");
+            case "2":
+                getStudents();
                 break;
-            case 3:
+            case "3":
                 studentInschrijven();
                 break;
-            case 4:
+            case "4":
                 studentUitschrijven();
                 break;
-            case 5:
-                System.out.println("damn bruh");
+            case "5":
+                System.out.println("Student Wishal Heeft alle examens gehaald.");
+                this.showMenu();
                 break;
-            case 6:
+            case "6":
                 System.out.println("Student Wishal Heeft de meeste examens gehaald");
+                this.showMenu();
+                break;
+            case "7":
+                System.out.println("Examen afnemen");
+                this.showMenu();
+                break;
+            case "8":
+                System.out.println("Exit");
                 break;
             default:
-                System.out.println("Bruh " + keuze + " bestaad niet, voer iets ander in man.");
+                System.out.println("\033[1;31m" + "\nWAARSCHUWING! '" + keuze + "' bestaad niet!\n" + "\033[0m" + "Voer een geldig getal in.");
+                this.showMenu();
+
         }
     }
 
-    public void getExamens() {
-        ExamenDatabase examenDatabase = new ExamenDatabase();
-        for (Examen examen : examenDatabase.getAlleExamens()) {
-            System.out.println(
-                    "\n\t\t\tnaam: " + examen.getNaam() + "\n" +
-                    "tijd om te maken: " + examen.getTijdOmTeMaken() + " minuten\n" +
-                    "   voldoende bij: " + examen.getVoldoendeBij() + " punten of meer\n" +
-                    "   aantal vragen: " + examen.getVragen().size());
-        }
+    public void getExams() {
+        System.out.println("Lijst Examens:");
+        //TODO Functie afmaken
+
+        this.showMenu();
+
     }
 
-    public ArrayList<Student> getStudents() {
-        return null;
+    public void getStudents() {
+        System.out.println("Lijst Studenten:");
+        //TODO Functie afmaken
 
+        this.showMenu();
     }
 
     public void studentInschrijven() {
+
         for (int i = 0; i < 2500; i++) {
             System.out.println("Vul uw studentnummer in");
             String studentNummer = reader.nextLine();
@@ -88,13 +104,14 @@ public class Menu {
                 System.out.println(studentNaam + ", U bent succesvol ingeschreven.");
                 this.showMenu();
                 break;
+
             } else {
                 System.out.println("Dit studentennummer is al ingeschreven, probeer het opnieuw.");
             }
         }
     }
 
-    public void studentUitschrijven() {
+    public void studentUitschrijven(){
         System.out.println("Vul uw studentnummer in");
         String studentNummer = reader.nextLine();
 
@@ -104,9 +121,9 @@ public class Menu {
                 System.out.println("U bent succesvol uitgeschreven");
                 System.out.println(StudentenLijst); // Check, can be removed later
                 this.showMenu();
+
             }
         }
-
         if (!StudentenLijst.contains(studentNummer)) {
             System.out.println("U was niet ingeschreven");
             this.showMenu();
