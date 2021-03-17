@@ -10,14 +10,12 @@ class Menu {
 
     //Deze methode toont het menu
     public void showMenu() {
-
         if(!firstRun){
             System.out.println("\n\nDruk op een toets om door te gaan...");
             reader.nextLine();
             System.out.println("\n\n\n\n\n\n\n\n\n");
         }
         firstRun = false;
-
 
         //ASCII text source: https://fsymbols.com/generators/carty/
         System.out.println("\n" +
@@ -113,7 +111,6 @@ class Menu {
         }
     }
 
-
     public void studentUitschrijven(){
         System.out.println("Vul uw studentnummer in");
         String studentNummer = reader.nextLine();
@@ -130,7 +127,6 @@ class Menu {
         if (!StudentenLijst.contains(studentNummer)) {
             System.out.println("U was niet ingeschreven");
             this.showMenu();
-
         }
     }
 }
