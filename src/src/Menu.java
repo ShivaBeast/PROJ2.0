@@ -3,67 +3,88 @@ import java.util.Scanner;
 
 class Menu {
 
-    String opties[];
-    Examen examen[];
-    Student student[];
+    public static Boolean firstRun = true;
     public static ArrayList<String> StudentenLijst = new ArrayList<>();
     Scanner reader = new Scanner(System.in);
 
 
+    //Deze methode toont het menu
     public void showMenu() {
-        Scanner scanner = new Scanner(System.in);
+        if(!firstRun){
+            System.out.println("\n\nDruk op een toets om door te gaan...");
+            reader.nextLine();
+            System.out.println("\n\n\n\n\n\n\n\n\n");
+        }
+        firstRun = false;
 
+        //ASCII text source: https://fsymbols.com/generators/carty/
+        System.out.println("\n" +
+            "░█─░█ █▀▀█ █▀▀█ █▀▀▀ █▀▀ █▀▀ 　 ░█─░█ █▀▀█ █▀▀▀ █▀▀ 　 ░█▀▀▀█ █▀▀ █──█ █▀▀█ █▀▀█ █── \n" +
+            "░█▀▀█ █▄▄█ █▄▄█ █─▀█ ▀▀█ █▀▀ 　 ░█▀▀█ █──█ █─▀█ █▀▀ 　 ─▀▀▀▄▄ █── █▀▀█ █──█ █──█ █── \n" +
+            "░█─░█ ▀──▀ ▀──▀ ▀▀▀▀ ▀▀▀ ▀▀▀ 　 ░█─░█ ▀▀▀▀ ▀▀▀▀ ▀▀▀ 　 ░█▄▄▄█ ▀▀▀ ▀──▀ ▀▀▀▀ ▀▀▀▀ ▀▀▀");
         System.out.println("1. Lijst met examens ");
         System.out.println("2. Lijst met studenten ");
         System.out.println("3. Student inschrijven ");
         System.out.println("4. Student Uitschrijven ");
         System.out.println("5. Welke examens heeft student gehaald? ");
         System.out.println("6. Welke student heeft de meeste examens gehaald?");
-        System.out.println("7. Exit");
+        System.out.println("7. Examen afnemen ");
+        System.out.println("8. Exit");
         System.out.println("Voer je keuze in:");
-
-        Integer invoer = scanner.nextInt();
+        String invoer = reader.nextLine();
         getChoice(invoer);
-
     }
 
-    public void getChoice(Integer keuze) {
+    //Deze methode verkrijgt de invoer van de gebruiker en stuurt hem in het volgende scherm
+    public void getChoice(String keuze) {
         switch (keuze) {
-            case 1:
-                System.out.println("Lijst examens");
+            case "1":
+                getExams();
                 break;
-            case 2:
-                System.out.println("Lijst studenten");
+            case "2":
+                getStudents();
                 break;
-            case 3:
+            case "3":
                 studentInschrijven();
                 break;
-            case 4:
+            case "4":
                 studentUitschrijven();
                 break;
-            case 5:
-                System.out.println("damn bruh");
+            case "5":
+                System.out.println("Student Wishal Heeft alle examens gehaald.");
+                this.showMenu();
                 break;
-            case 6:
+            case "6":
                 System.out.println("Student Wishal Heeft de meeste examens gehaald");
+                this.showMenu();
                 break;
-            case 7:
-                System.out.println("exit");
+            case "7":
+                System.out.println("Examen afnemen");
+                this.showMenu();
+                break;
+            case "8":
+                System.out.println("Exit");
                 break;
             default:
-                System.out.println("Bruh " + keuze + " bestaad niet, voer iets ander in man.");
+                System.out.println("\033[1;31m" + "\nWAARSCHUWING! '" + keuze + "' bestaad niet!\n" + "\033[0m" + "Voer een geldig getal in.");
+                this.showMenu();
 
         }
     }
 
-    public ArrayList<Examen> getExams() {
-        return null;
+    public void getExams() {
+        System.out.println("Lijst Examens:");
+        //TODO Functie afmaken
+
+        this.showMenu();
 
     }
 
-    public ArrayList<Student> getStudents() {
-        return null;
+    public void getStudents() {
+        System.out.println("Lijst Studenten:");
+        //TODO Functie afmaken
 
+        this.showMenu();
     }
 
 
@@ -105,7 +126,6 @@ class Menu {
         }
     }
 
-
     public void studentUitschrijven(){
         System.out.println("Vul uw studentnummer in");
         String studentNummer = reader.nextLine();
@@ -125,12 +145,4 @@ class Menu {
 
         }
     }
-}
-
-class Examen{
-
-}
-
-class Student{
-
 }
