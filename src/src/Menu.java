@@ -13,7 +13,7 @@ class Menu {
         if(!firstRun){
             System.out.println("\n\nDruk op een toets om door te gaan...");
             reader.nextLine();
-            System.out.println("\n\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n\n\n\n");
         }
         firstRun = false;
 
@@ -22,15 +22,16 @@ class Menu {
             "░█─░█ █▀▀█ █▀▀█ █▀▀▀ █▀▀ █▀▀ 　 ░█─░█ █▀▀█ █▀▀▀ █▀▀ 　 ░█▀▀▀█ █▀▀ █──█ █▀▀█ █▀▀█ █── \n" +
             "░█▀▀█ █▄▄█ █▄▄█ █─▀█ ▀▀█ █▀▀ 　 ░█▀▀█ █──█ █─▀█ █▀▀ 　 ─▀▀▀▄▄ █── █▀▀█ █──█ █──█ █── \n" +
             "░█─░█ ▀──▀ ▀──▀ ▀▀▀▀ ▀▀▀ ▀▀▀ 　 ░█─░█ ▀▀▀▀ ▀▀▀▀ ▀▀▀ 　 ░█▄▄▄█ ▀▀▀ ▀──▀ ▀▀▀▀ ▀▀▀▀ ▀▀▀");
-        System.out.println("1. Lijst met examens ");
-        System.out.println("2. Lijst met studenten ");
-        System.out.println("3. Student inschrijven ");
-        System.out.println("4. Student Uitschrijven ");
-        System.out.println("5. Welke examens heeft student gehaald? ");
+
+        System.out.println("\n1. Lijst met examens");
+        System.out.println("2. Lijst met studenten");
+        System.out.println("3. Student inschrijven");
+        System.out.println("4. Student Uitschrijven");
+        System.out.println("5. Welke examens heeft student gehaald?");
         System.out.println("6. Welke student heeft de meeste examens gehaald?");
-        System.out.println("7. Examen afnemen ");
+        System.out.println("7. Examen afnemen");
         System.out.println("8. Exit");
-        System.out.println("Voer je keuze in:");
+        System.out.print("Voer je keuze in: ");
         String invoer = reader.nextLine();
         getChoice(invoer);
     }
@@ -73,11 +74,15 @@ class Menu {
     }
 
     public void getExams() {
-        System.out.println("Lijst Examens:");
-        //TODO Functie afmaken
-
+        ExamenDatabase examenDatabase = new ExamenDatabase();
+        for (Examen examen : examenDatabase.getAlleExamens()) {
+            System.out.println(
+                    "\n\t\t\tnaam: " + examen.getNaam() + "\n" +
+                    "tijd om te maken: " + examen.getTijdOmTeMaken() + " minuten\n" +
+                    "   voldoende bij: " + examen.getVoldoendeBij() + " punten of meer\n" +
+                    "   aantal vragen: " + examen.getVragen().size());
+        }
         this.showMenu();
-
     }
 
     public void getStudents() {
