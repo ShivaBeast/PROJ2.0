@@ -13,7 +13,7 @@ class Menu {
         if(!firstRun){
             System.out.println("\n\nDruk op een toets om door te gaan...");
             reader.nextLine();
-            System.out.println("\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n");
         }
         firstRun = false;
 
@@ -43,7 +43,7 @@ class Menu {
                 getExams();
                 break;
             case "2":
-                getStudents();
+                System.out.println(getStudents());
                 break;
             case "3":
                 studentInschrijven();
@@ -85,11 +85,9 @@ class Menu {
         this.showMenu();
     }
 
-    public void getStudents() {
+    public ArrayList<String> getStudents() {
         System.out.println("Lijst Studenten:");
-        //TODO Functie afmaken
-
-        this.showMenu();
+        return StudentenLijst;
     }
 
 
