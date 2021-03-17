@@ -14,14 +14,14 @@ public class Main {
 
         open.add(new Vraag("Wat is het 3e planeet in ons zonnestelsel?", "Aarde", 10));
         open.add(new Vraag("Hoe heet de koning van Nederland?", "Willem Alexander", 10));
-        open.add(new Vraag("Wie was de 1e gekleurde president van Amerika?","Barack Obama", 10));
+        open.add(new Vraag("Wie was de 1e gekleurde president van Amerika?", "Barack Obama", 10));
         open.add(new Vraag("Welk land heeft de meeste bewoners van heel de wereld?", "China", 10));
         open.add(new Vraag("Welk land behoort sinds 2020 niet meer tot de EU?", "Het Verenigd Koningkrijk", 10));
         open.add(new Vraag("Welke wereldwonder bevindt zich in India?", "De Taj Mahal", 10));
         open.add(new Vraag("Wat is de beste vriend van mens?", "De hond", 10));
         open.add(new Vraag("Waar zijn panda beren bekend om?", "Hun kleur", 10));
         open.add(new Vraag("Hoe lang duurt het gemiddeld wanneer een baby geboren is?", "9 maanden", 10));
-        open.add(new Vraag("Wie is de huidige president van Amerika?","Joe Biden", 10));
+        open.add(new Vraag("Wie is de huidige president van Amerika?", "Joe Biden", 10));
 
         return open;
     }
@@ -42,3 +42,4 @@ public class Main {
 
         return mc;
     }
+}
