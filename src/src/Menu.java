@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class Menu {
 
     private String opties[];
-    private ArrayList<Examen> examens;
     private Student student[];
 
     public static ArrayList<String> StudentenLijst = new ArrayList<>();
@@ -25,6 +24,7 @@ public class Menu {
         Integer invoer = scanner.nextInt();
         while (invoer != 7) {
             getChoice(invoer);
+            System.out.print("\nVoer je keuze in: ");
             invoer = scanner.nextInt();
         }
         System.out.println("Exit");
@@ -33,7 +33,8 @@ public class Menu {
     public void getChoice(Integer keuze) {
         switch (keuze) {
             case 1:
-                System.out.println("Lijst examens");
+                System.out.println("Lijst met de examens.");
+                getExamens();
                 break;
             case 2:
                 System.out.println("Lijst studenten");
@@ -52,12 +53,18 @@ public class Menu {
                 break;
             default:
                 System.out.println("Bruh " + keuze + " bestaad niet, voer iets ander in man.");
-
         }
     }
 
-    public ArrayList<Examen> getExamens() {
-        return null;
+    public void getExamens() {
+        ExamenDatabase examenDatabase = new ExamenDatabase();
+        for (Examen examen : examenDatabase.getAlleExamens()) {
+            System.out.println(
+                    "\n\t\t\tnaam: " + examen.getNaam() + "\n" +
+                    "tijd om te maken: " + examen.getTijdOmTeMaken() + " minuten\n" +
+                    "   voldoende bij: " + examen.getVoldoendeBij() + " punten of meer\n" +
+                    "   aantal vragen: " + examen.getVragen().size());
+        }
     }
 
     public ArrayList<Student> getStudents() {

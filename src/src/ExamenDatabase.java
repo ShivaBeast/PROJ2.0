@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class ExamenDatabase {
     // In deze ArrayList komen alle examens te staan.
-    public static ArrayList<Examen> alleExamens = new ArrayList<Examen>();
+    private ArrayList<Examen> alleExamens = new ArrayList<Examen>();
 
     /**
      * Bij het aanmaken van een instance, worden alvast de bestaande examens toegevoegd.
@@ -18,7 +18,7 @@ public class ExamenDatabase {
      *
      * @return ArrayList<ArrayList<Examen>> - Een ArrayList dat alle examens bevat.
      */
-    public static ArrayList<Examen> getAlleExamens() {
+    public ArrayList<Examen> getAlleExamens() {
         return alleExamens;
     }
 
@@ -27,7 +27,7 @@ public class ExamenDatabase {
      *
      * @param examen - De toe te voegen examen.
      */
-    public static void voegExamenToe(Examen examen) {
+    public void voegExamenToe(Examen examen) {
         alleExamens.add(examen);
     }
 
@@ -36,10 +36,8 @@ public class ExamenDatabase {
      *
      * @param examenNaam - Naam van de ongewenste examen.
      */
-    public static void verwijderExamen(String examenNaam) {
-        for (Examen examen : alleExamens) {
-            if (examen.getNaam().equals(examenNaam)) { alleExamens.remove(examen); }
-        }
+    public void verwijderExamen(String examenNaam) {
+        alleExamens.removeIf(examen -> examen.getNaam().equals(examenNaam));
     }
 
     /******************** Vragen voor de examens ********************/
