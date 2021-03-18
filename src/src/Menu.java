@@ -21,6 +21,7 @@ public class Menu {
         System.out.println("5. Welke examens heeft student gehaald?");
         System.out.println("6. Welke student heeft de meeste examens gehaald?");
         System.out.println("7. Examen afnemen");
+        System.out.println("8. Afsluiten");
         System.out.print("Voer je keuze in: ");
     }
 
@@ -41,23 +42,17 @@ public class Menu {
                 break;
             case "5":
                 System.out.println("Student Wishal Heeft alle examens gehaald.");
-                this.showMenu();
                 break;
             case "6":
                 System.out.println("Student Wishal Heeft de meeste examens gehaald");
-                this.showMenu();
                 break;
             case "7":
                 System.out.println("Examen afnemen");
-                this.showMenu();
                 break;
             case "8":
-                System.out.println("Exit");
                 break;
             default:
                 System.out.println("\033[1;31m" + "\nWAARSCHUWING! '" + keuze + "' bestaad niet!\n" + "\033[0m" + "Voer een geldig getal in.");
-                this.showMenu();
-
         }
     }
 
@@ -67,12 +62,11 @@ public class Menu {
     public void getExams() {
         for (Examen examen : examenDatabase.getAlleExamens()) {
             System.out.println(
-                    "\n\t\t\tnaam: " + examen.getNaam() + "\n" +
-                    "tijd om te maken: " + examen.getTijdOmTeMaken() + " minuten\n" +
-                    "   voldoende bij: " + examen.getVoldoendeBij() + " punten of meer\n" +
-                    "   aantal vragen: " + examen.getVragen().size());
+                "\n\t\t\tnaam: " + examen.getNaam() + "\n" +
+                "tijd om te maken: " + examen.getTijdOmTeMaken() + " minuten\n" +
+                "   voldoende bij: " + examen.getVoldoendeBij() + " punten of meer\n" +
+                "   aantal vragen: " + examen.getVragen().size());
         }
-        this.showMenu();
     }
 
     public ArrayList<String> getStudents() {
@@ -83,7 +77,6 @@ public class Menu {
 
 
     public void studentInschrijven() {
-
         for (int i = 0; i < 2500; i++) {
             System.out.println("Vul uw studentnummer in");
             String studentNummer = reader.nextLine();
@@ -92,8 +85,6 @@ public class Menu {
                 System.out.println("Vul uw studentnummer in");
                 studentNummer = reader.next();
             }
-
-
 
             // TODO : studentNummer <= 8
 
@@ -107,12 +98,9 @@ public class Menu {
                     studentNaam = reader.next();
                 }
 
-
                 StudentenLijst.add(studentNummer + " " + studentNaam);
                 System.out.println(studentNaam + ", U bent succesvol ingeschreven.");
-                this.showMenu();
                 break;
-
             } else {
                 System.out.println("Dit studentennummer is al ingeschreven, probeer het opnieuw.");
             }
@@ -128,14 +116,10 @@ public class Menu {
                 System.out.println(StudentenLijst.get(i) + ", U bent succesvol uitgeschreven.");
                 StudentenLijst.remove(i);
                 System.out.println(StudentenLijst); // Check, can be removed later
-                this.showMenu();
-
             }
         }
         if (!StudentenLijst.contains(studentNummer)) {
             System.out.println("U was niet ingeschreven");
-            this.showMenu();
-
         }
     }
 }

@@ -1,17 +1,13 @@
 import java.util.Scanner;
 
-public class Programma {
+public class ExamenAdministratie {
     private Menu menu = new Menu();
     private Scanner reader = new Scanner(System.in);
 
     public void start() {
         menu.showMenu();
         String keuze = reader.nextLine();
-
-        while (keuze != "8") {
-            menu.getChoice(keuze);
-            keuze = reader.nextLine();
-        }
+        menu.getChoice(keuze);
 
         stop();
     }
