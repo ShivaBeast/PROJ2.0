@@ -19,7 +19,7 @@ public class Vraag {
 
     }
 
-    public Vraag(ArrayList<String> keuzes, String mcvraag, char mcantwoord, int punten){
+    public Vraag(String mcvraag, ArrayList<String> keuzes, char mcantwoord, int punten){
         this.keuzes = keuzes;
         this.mcvraag = mcvraag;
         this.mcantwoord = mcantwoord;
@@ -47,18 +47,28 @@ public class Vraag {
     public ArrayList<Vraag> MCVragen() {
         ArrayList<Vraag> mc = new ArrayList<>();
 
-        mc.add(new Vraag(1, "Waar staat HTML voor?", 'A', 10));
-        mc.add(new Vraag(2, "Welke smartphone bedrijf behoort niet tot China?", 'B', 10));
-        mc.add(new Vraag(3, "Welke code is correct?", 'B', 10));
-        mc.add(new Vraag(4, "Wat is de functie van de Scrum Master?", 'A', 10));
-        mc.add(new Vraag(5, "Welke van de 4 methoden is de constructor?", 'C', 10));
-        mc.add(new Vraag(6, "Welk land werd de 1e die wiet legaliseerde?", 'C', 10));
-        mc.add(new Vraag(7, "Welke programmeertaal wordt gebruikt voor het bouwen van een website?", 'C', 10));
-        mc.add(new Vraag(8, "Welk land behoort niet tot Zuid-Amerika?", 'D', 10));
-        mc.add(new Vraag(9, "Wie heeft de wereldrecord als de snelste man ter wereld?", 'B', 10));
-        mc.add(new Vraag(10, "Hoe heet de zoon van god?", 'A', 10));
+        mc.add(new Vraag("Hoeveel Megabytes is 1 Gigabyte?", opties("1000", "10", "100","1"), 'A', 10));
+        mc.add(new Vraag( "Welke smartphone bedrijf behoort niet tot China?", opties("Huawei", "Samsung", "Honor", "Xiaomi"),'B', 10));
+        mc.add(new Vraag( "Wat is de hoofdstad van Nederland?", opties("Den Haag", "Amsterdam", "Rotterdam", "Giethoorn"),'B', 10));
+        mc.add(new Vraag("Wat is de functie van campers?", opties("Trollen", "Uitschelden", "Helpen", "Boosten"), 'A', 10));
+        mc.add(new Vraag( "Welke van de 4 personen is de rijkste man ter wereld?", opties("Elon Musk", "Bill Gates", "Jeff Bezos", "Mark Zuckerberg"),'C', 10));
+        mc.add(new Vraag( "Welk land werd de 1e die wiet legaliseerde?", opties("Amerika", "Nederland", "Canada", "Singapore"),'C', 10));
+        mc.add(new Vraag( "Welke programmeertaal wordt gebruikt voor het bouwen van een website?", opties("Java", "Python", "HTML/CSS", "C#"),'C', 10));
+        mc.add(new Vraag( "Welk land behoort niet tot Zuid-Amerika?", opties("Venezuela", "Colombia", "Chile", "Indian"),'D', 10));
+        mc.add(new Vraag( "Wie heeft de wereldrecord als de snelste man ter wereld?", opties("Florence Griffith-Joyner", "Usian Bolt", "Tyson Gay", "Mike Rodgers"),'B', 10));
+        mc.add(new Vraag( "Hoe heet de zoon van god?",opties("Jezus Christus","Keanu Reeves","Penquinz0","Lucifer Morningstar"), 'A', 10));
 
         return mc;
+    }
+
+    public ArrayList<String> opties(String A, String B, String C, String D){
+        ArrayList<String> keuzes = new ArrayList<String>();
+        keuzes.add("A. " + A);
+        keuzes.add("B. " + B);
+        keuzes.add("C " + C);
+        keuzes.add("D " + D);
+
+        return keuzes;
     }
 
     public String getVraag() { return vraag; }
