@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Vraag {
     private String vraag;
     private String antwoord;
+<<<<<<< HEAD
     private int nummer;
     private String mcvraag;
     private char mcantwoord;
@@ -57,17 +58,48 @@ public class Vraag {
         mc.add(new Vraag(10, "Hoe heet de zoon van god?", 'A', 10));
 
         return mc;
+=======
+    private String mcvraag;
+    private char mcantwoord;
+    private int punten;
+    private ArrayList<String> keuzes;
+
+    public Vraag(String vraag, String antwoord, int punten){
+
+        this.vraag = vraag;
+        this.antwoord = antwoord;
+        this.punten = punten;
+
+    }
+
+    public Vraag(ArrayList<String> keuzes, String mcvraag, char mcantwoord, int punten){
+
+        this.keuzes = keuzes;
+        this.mcvraag = mcvraag;
+        this.mcantwoord = mcantwoord;
+        this.punten = punten;
+
+>>>>>>> d4d193684dfff1d2ba7c798d3aadc24b170c703e
     }
 
     public String getVraag() { return vraag; }
 
     public String getAntwoord() { return antwoord; }
 
+<<<<<<< HEAD
     public int getNummer() { return nummer; }
+=======
+    public ArrayList<String> getKeuzes() { return keuzes; }
+>>>>>>> d4d193684dfff1d2ba7c798d3aadc24b170c703e
 
     public String getMcvraag() { return mcvraag; }
 
     public char getMcantwoord() { return mcantwoord; }
 
+<<<<<<< HEAD
     public int getPunten() {return punten;}
 }
+=======
+    public int getPunten() { return punten; }
+}
+>>>>>>> d4d193684dfff1d2ba7c798d3aadc24b170c703e
