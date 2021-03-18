@@ -27,14 +27,6 @@ public class TestExamen {
     }
 
     @Test
-    public void testSetIsGeslaagd() {
-        Examen examen = new Examen("Examen 3", null, 55, 90);
-
-        examen.setGeslaagd(true);
-        Assertions.assertTrue(examen.isGeslaagd());
-    }
-
-    @Test
     public void testSetGetVoldoendeBij() {
         Examen examen = new Examen("Examen 4", null, 60, 120);
 

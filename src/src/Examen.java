@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class Examen {
     private String naam;
-    private boolean geslaagd;
     private int voldoendeBij;
     private int tijdOmTeMaken;
     private ArrayList<Vraag> vragen;
@@ -36,22 +35,6 @@ public class Examen {
      */
     public void setNaam(String naam) {
         this.naam = naam;
-    }
-
-    /**
-     * Getter voor geslaagd.
-     * @return boolean geslaagd
-     */
-    public boolean isGeslaagd() {
-        return geslaagd;
-    }
-
-    /**
-     * Setter voor geslaagd.
-     * @param geslaagd - true of false
-     */
-    public void setGeslaagd(boolean geslaagd) {
-        this.geslaagd = geslaagd;
     }
 
     /**

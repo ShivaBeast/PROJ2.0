@@ -7,7 +7,11 @@ public class ExamenAdministratie {
     public void start() {
         menu.showMenu();
         String keuze = reader.nextLine();
-        menu.getChoice(keuze);
+
+        while (!keuze.equals("8")) {
+            menu.getChoice(keuze);
+            keuze = reader.nextLine();
+        }
 
         stop();
     }

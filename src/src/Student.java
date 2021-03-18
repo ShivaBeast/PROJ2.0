@@ -17,12 +17,4 @@ public class Student {
     public String getStudentNummer() {
         return this.studentNummer;
     }
-
-    public void inloggen() {
-        Scanner scanner = new Scanner(System.in);
-        this.name = scanner.nextLine();
-        while(studentNummer.length() <= 0 || studentNummer.length() > 8){
-            this.studentNummer = scanner.nextLine();
-        }
-    }
 }

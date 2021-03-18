@@ -52,7 +52,7 @@ public class Menu {
             case "8":
                 break;
             default:
-                System.out.println("\033[1;31m" + "\nWAARSCHUWING! '" + keuze + "' bestaad niet!\n" + "\033[0m" + "Voer een geldig getal in.");
+                System.out.println("\033[1;31m" + "\nWAARSCHUWING! '" + keuze + "' bestaat niet!\n" + "\033[0m" + "Voer een geldig getal in.");
         }
     }
 
