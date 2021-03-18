@@ -1,10 +1,12 @@
+import java.util.ArrayList;
+
 public class Vraag {
     private String vraag;
     private String antwoord;
-    private int nummer;
     private String mcvraag;
     private char mcantwoord;
     private int punten;
+    private ArrayList<String> keuzes;
 
     public Vraag(String vraag, String antwoord, int punten){
 
@@ -14,9 +16,9 @@ public class Vraag {
 
     }
 
-    public Vraag(int nummer, String mcvraag, char mcantwoord, int punten){
+    public Vraag(ArrayList<String> keuzes, String mcvraag, char mcantwoord, int punten){
 
-        this.nummer = nummer;
+        this.keuzes = keuzes;
         this.mcvraag = mcvraag;
         this.mcantwoord = mcantwoord;
         this.punten = punten;
@@ -27,7 +29,7 @@ public class Vraag {
 
     public String getAntwoord() { return antwoord; }
 
-    public int getNummer() { return nummer; }
+    public ArrayList<String> getKeuzes() { return keuzes; }
 
     public String getMcvraag() { return mcvraag; }
 
