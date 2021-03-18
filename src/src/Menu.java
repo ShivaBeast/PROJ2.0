@@ -31,7 +31,7 @@ public class Menu {
                 getExams();
                 break;
             case "2":
-                getStudents();
+                System.out.println(getStudents());
                 break;
             case "3":
                 studentInschrijven();
@@ -75,11 +75,9 @@ public class Menu {
         this.showMenu();
     }
 
-    public void getStudents() {
+    public ArrayList<String> getStudents() {
         System.out.println("Lijst Studenten:");
-        //TODO Functie afmaken
-
-        this.showMenu();
+        return StudentenLijst;
     }
 
 
