@@ -1,9 +1,11 @@
+import javax.swing.*;
 import java.util.Scanner;
 
 
 class Student {
     public static void main(String[] args) {
-
+        Student student = new Student();
+        student.inloggen();
     }
     private String name;
     private String studentNummer;
@@ -13,6 +15,13 @@ class Student {
         this.studentNummer = studentNummer;
     }
 
+    public void setStudentNummer(String studentNummer){
+        this.studentNummer = studentNummer;
+    }
+
+    public Student(){
+    };
+
     public String getName(){
         return this.name;
     }
@@ -21,11 +30,23 @@ class Student {
         return this.studentNummer;
     }
 
-    public void inloggen(){
+    public void inloggen() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Voer je naam in: ");
         this.name = scanner.nextLine();
-        while(studentNummer.length() <= 0 || studentNummer.length() > 8){
+        System.out.println("Voer je studentnummer in: ");
+        this.studentNummer = scanner.nextLine();
+        while(!checkStudentNummerLength(this.studentNummer)){
+            System.out.println("Een student nummer is 1 - 8 karakters lang. Voer opnieuw in: ");
             this.studentNummer = scanner.nextLine();
+         }
+        System.out.printf("Inloggen succcesvol. Naam: %s, studentnummer: %s",this.name,this.studentNummer);
+    }
+
+    public boolean checkStudentNummerLength(String studentNummer){
+        if(studentNummer.length() <= 0 || studentNummer.length() > 8){
+            return false;
         }
+        return true;
     }
 }
