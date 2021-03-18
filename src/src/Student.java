@@ -14,10 +14,6 @@ class Student {
         this.studentNummer = studentNummer;
     }
 
-    public void setStudentNummer(String studentNummer){
-        this.studentNummer = studentNummer;
-    }
-
     public Student(){
     };
 
