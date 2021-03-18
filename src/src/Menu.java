@@ -22,7 +22,7 @@ public class Menu {
         System.out.println("6. Welke student heeft de meeste examens gehaald?");
         System.out.println("7. Examen afnemen");
         System.out.println("8. Afsluiten");
-        System.out.print("Voer je keuze in: ");
+        System.out.print("Voer je keuze in: \n");
     }
 
     //Deze methode verkrijgt de invoer van de gebruiker en stuurt hem in het volgende scherm
@@ -52,7 +52,7 @@ public class Menu {
             case "8":
                 break;
             default:
-                System.out.println("\033[1;31m" + "\nWAARSCHUWING! '" + keuze + "' bestaad niet!\n" + "\033[0m" + "Voer een geldig getal in.");
+                System.out.println("\033[1;31m " + "\nWAARSCHUWING! '" + keuze + "' bestaad niet!\n" + "\033[0m" + "Voer een geldig getal in.");
         }
     }
 
