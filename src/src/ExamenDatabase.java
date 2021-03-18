@@ -42,7 +42,7 @@ public class ExamenDatabase {
 
     /******************** Vragen voor de examens ********************/
 
-    public static ArrayList<Vraag> vragen() {
+    public ArrayList<Vraag> vragen() {
         ArrayList<Vraag> open = new ArrayList<>();
 
         open.add(new Vraag("Wat is het 3e planeet in ons zonnestelsel?", "Aarde", 10));
@@ -59,7 +59,7 @@ public class ExamenDatabase {
         return open;
     }
 
-    public static ArrayList<Vraag> MCVragen() {
+    public ArrayList<Vraag> MCVragen() {
         ArrayList<Vraag> mc = new ArrayList<>();
 
         mc.add(new Vraag(1, "Waar staat HTML voor?", 'A', 10));

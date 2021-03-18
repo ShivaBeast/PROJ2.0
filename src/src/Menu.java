@@ -1,22 +1,13 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Menu {
+public class Menu {
+    public static ArrayList<String> StudentenLijst = new ArrayList<String>();
+    private Scanner reader = new Scanner(System.in);
+    private ExamenDatabase examenDatabase = new ExamenDatabase();
 
-    public static Boolean firstRun = true;
-    public static ArrayList<String> StudentenLijst = new ArrayList<>();
-    Scanner reader = new Scanner(System.in);
-
-
-    //Deze methode toont het menu
+    // Deze methode toont het menu
     public void showMenu() {
-        if(!firstRun){
-            System.out.println("\n\nDruk op een toets om door te gaan...");
-            reader.nextLine();
-            System.out.println("\n\n\n\n\n\n\n\n");
-        }
-        firstRun = false;
-
         //ASCII text source: https://fsymbols.com/generators/carty/
         System.out.println("\n" +
             "░█─░█ █▀▀█ █▀▀█ █▀▀▀ █▀▀ █▀▀ 　 ░█─░█ █▀▀█ █▀▀▀ █▀▀ 　 ░█▀▀▀█ █▀▀ █──█ █▀▀█ █▀▀█ █── \n" +
@@ -30,10 +21,7 @@ class Menu {
         System.out.println("5. Welke examens heeft student gehaald?");
         System.out.println("6. Welke student heeft de meeste examens gehaald?");
         System.out.println("7. Examen afnemen");
-        System.out.println("8. Exit");
         System.out.print("Voer je keuze in: ");
-        String invoer = reader.nextLine();
-        getChoice(invoer);
     }
 
     //Deze methode verkrijgt de invoer van de gebruiker en stuurt hem in het volgende scherm
@@ -73,8 +61,10 @@ class Menu {
         }
     }
 
+    /**
+     * Laat een lijst zien van alle examens die toegevoegd zijn aan het programma.
+     */
     public void getExams() {
-        ExamenDatabase examenDatabase = new ExamenDatabase();
         for (Examen examen : examenDatabase.getAlleExamens()) {
             System.out.println(
                     "\n\t\t\tnaam: " + examen.getNaam() + "\n" +
