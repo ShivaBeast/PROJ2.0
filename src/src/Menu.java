@@ -74,8 +74,6 @@ public class Menu {
         return StudentenLijst;
     }
 
-
-
     public void studentInschrijven() {
         for (int i = 0; i < 2500; i++) {
             System.out.println("Vul uw studentnummer in");
@@ -121,5 +119,17 @@ public class Menu {
         if (!StudentenLijst.contains(studentNummer)) {
             System.out.println("U was niet ingeschreven");
         }
+    }
+
+    public void lijstGeslaagde(){
+        //TODO functie afmaken
+    }
+
+    public void statetiekStudent(){
+        //TODO functie afmaken
+    }
+
+    public void examenAfnemen(){
+        //TODO functie afmaken
     }
 }
