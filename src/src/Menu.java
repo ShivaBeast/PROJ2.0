@@ -240,6 +240,11 @@ public class Menu {
         studentenLijst.add(student);
     }
 
+    /**
+     * Check of een studentennummer uniek is.
+     * @param studentenNummer - studentennummer
+     * @return true of false
+     */
     private boolean isStudentenNummerUniek(String studentenNummer) {
         boolean isUniek = false;
         for (Student student : studentenLijst) {
