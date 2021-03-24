@@ -1,16 +1,16 @@
 import java.util.ArrayList;
 
-public class ExamenDatabase {
+public class ExamenVerzameling {
     private ArrayList<Examen> alleExamens = new ArrayList<Examen>();
     private Vraag vragen = new Vraag();
 
     /**
      * Bij het aanmaken van een instance, worden alvast de bestaande examens toegevoegd.
      */
-    public ExamenDatabase() {
+    public ExamenVerzameling() {
         // Voeg de bestaande examens toe aan de lijst.
-        alleExamens.add(new Examen("Examen 1", vragen.vragen(), 55, 90));
-        alleExamens.add(new Examen("Examen 2", vragen.MCVragen(), 55, 120));
+        alleExamens.add(new Examen("Examen 1", vragen.vragen()));
+        alleExamens.add(new Examen("Examen 2", vragen.MCVragen()));
     }
 
     /**

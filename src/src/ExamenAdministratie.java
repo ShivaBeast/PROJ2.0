@@ -10,6 +10,7 @@ public class ExamenAdministratie {
 
         while (!keuze.equals("8")) {
             menu.getChoice(keuze);
+            System.out.print("\nVoer je keuze in: ");
             keuze = reader.nextLine();
         }
 

@@ -2,23 +2,23 @@ import java.util.ArrayList;
 
 public class Examen {
     private String naam;
-    private int voldoendeBij;
-    private int tijdOmTeMaken;
     private ArrayList<Vraag> vragen;
-    private Student gemaaktDoor;
 
     /**
      * Constructor voor een examen object.
      * @param naam - Naam van het examen.
      * @param vragen - Een lijst met alle vragen in het examen.
-     * @param voldoendeBij - Het aantal punten om een voldoende te behalen.
-     * @param tijdOmTeMaken - Hoelang het examen duurt in minuten.
      */
-    public Examen(String naam, ArrayList<Vraag> vragen, int voldoendeBij, int tijdOmTeMaken) {
+    public Examen(String naam, ArrayList<Vraag> vragen) {
         this.naam = naam;
         this.vragen = vragen;
-        this.voldoendeBij = voldoendeBij;
-        this.tijdOmTeMaken = tijdOmTeMaken;
+    }
+
+    /**
+     * Constructor zonder parameters.
+     */
+    public Examen() {
+        this("", null);
     }
 
     /**
@@ -38,38 +38,6 @@ public class Examen {
     }
 
     /**
-     * Getter voor voldoendeBij.
-     * @return int voldoendeBij
-     */
-    public int getVoldoendeBij() {
-        return voldoendeBij;
-    }
-
-    /**
-     * Setter voor voldoendeBij.
-     * @param voldoende - Aantal punten waarbij een student een voldoende heeft.
-     */
-    public void setVoldoendeBij(int voldoende) {
-        voldoendeBij = voldoende;
-    }
-
-    /**
-     * Getter voor tijdOmTeMaken.
-     * @return int tijdOmTeMaken
-     */
-    public int getTijdOmTeMaken() {
-        return tijdOmTeMaken;
-    }
-
-    /**
-     * Setter voor tijdOmTeMaken.
-     * @param tijd - Hoeveelheid tijd om een examen te maken.
-     */
-    public void setTijdOmTeMaken(int tijd) {
-        tijdOmTeMaken = tijd;
-    }
-
-    /**
      * Getter voor vragen.
      * @return ArrayList<Vraag> vragen
      */
@@ -83,21 +51,5 @@ public class Examen {
      */
     public void setVragen(ArrayList<Vraag> vragen) {
         this.vragen = vragen;
-    }
-
-    /**
-     * Getter voor gemaaktDoor.
-     * @return Student gemaaktDoor
-     */
-    public Student getGemaaktDoor() {
-        return gemaaktDoor;
-    }
-
-    /**
-     * Setter voor gemaaktDoor.
-     * @param door - Degene die het examen maakt.
-     */
-    public void setGemaaktDoor(Student door) {
-        gemaaktDoor = door;
     }
 }

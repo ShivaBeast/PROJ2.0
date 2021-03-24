@@ -1,10 +1,16 @@
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Menu {
-    public static ArrayList<String> StudentenLijst = new ArrayList<String>();
-    private Scanner reader = new Scanner(System.in);
-    private ExamenDatabase examenDatabase = new ExamenDatabase();
+    private final Scanner reader = new Scanner(System.in);
+    private ArrayList<Student> studentenLijst = new ArrayList<Student>();
+    private ExamenVerzameling examenVerzameling = new ExamenVerzameling();
+    private ArrayList<Examen> alleExamens = examenVerzameling.getAlleExamens();
+
+    private Examen afTeNemenExamen = new Examen();
+    private Student examenNemer = new Student();
+    private Afname poging = new Afname(false, 55);
 
     // Deze methode toont het menu
     public void showMenu() {
@@ -29,10 +35,10 @@ public class Menu {
     public void getChoice(String keuze) {
         switch (keuze) {
             case "1":
-                getExams();
+                showExamens();
                 break;
             case "2":
-                System.out.println(getStudents());
+                showStudentenLijst();
                 break;
             case "3":
                 studentInschrijven();
@@ -41,13 +47,22 @@ public class Menu {
                 studentUitschrijven();
                 break;
             case "5":
-                System.out.println("Student Wishal Heeft alle examens gehaald.");
+                studentGeslaagdVoor();
                 break;
             case "6":
                 System.out.println("Student Wishal Heeft de meeste examens gehaald");
                 break;
             case "7":
-                System.out.println("Examen afnemen");
+                // Als er geen studenten ingeschreven zijn, geef de optie om in te schrijven.
+                if (studentenLijst.isEmpty()) {
+                    System.out.print("Er zijn geen studenten! Wil je je inschrijven? (Ja/Nee) ");
+                    String inschrijven = reader.nextLine().toLowerCase(Locale.ROOT);
+                    if (inschrijven.equals("ja")) {
+                        studentInschrijven();
+                    }
+                } else {
+                    infoVoorExamenDoen();
+                }
                 break;
             case "8":
                 break;
@@ -59,67 +74,186 @@ public class Menu {
     /**
      * Laat een lijst zien van alle examens die toegevoegd zijn aan het programma.
      */
-    public void getExams() {
-        for (Examen examen : examenDatabase.getAlleExamens()) {
+    public void showExamens() {
+        for (Examen examen : examenVerzameling.getAlleExamens()) {
             System.out.println(
-                "\n\t\t\tnaam: " + examen.getNaam() + "\n" +
-                "tijd om te maken: " + examen.getTijdOmTeMaken() + " minuten\n" +
-                "   voldoende bij: " + examen.getVoldoendeBij() + " punten of meer\n" +
-                "   aantal vragen: " + examen.getVragen().size());
+                    "[Vak: " + examen.getNaam() + ", " +
+                    "Aantal vragen: " + examen.getVragen().size() + "]"
+            );
         }
     }
 
-    public ArrayList<String> getStudents() {
-        System.out.println("Lijst Studenten:");
-        return StudentenLijst;
+    public void showStudentenLijst() {
+        for (int i = 0; i < studentenLijst.size(); i++) {
+            System.out.println("[" + (i+1) + "]" + " " + studentenLijst.get(i).getNaam() + " " + studentenLijst.get(i).getStudentenNummer());
+        }
     }
 
+    /**
+     * Deze methode vergaart alle informatie die er nodig zijn om een examen te doen.
+     * Er zal eerst gevraagd worden welk examen een student wil doen.
+     * Daarna wordt er gevraagd wie de student is.
+     */
+    public void infoVoorExamenDoen() {
+        // Toon alle beschikbare examens.
+        showExamens();
 
+        // Vraag welke de student wil doen.
+        System.out.print("Welk examen wil je doen? Type de naam in: ");
+        String examenKeuze = reader.nextLine();
 
-    public void studentInschrijven() {
-        for (int i = 0; i < 2500; i++) {
-            System.out.println("Vul uw studentnummer in");
-            String studentNummer = reader.nextLine();
+        // Als het examen niet aanwezig is, wordt nog een keer om een invoer gevraagd.
+        while (!isExamenKeuzeAanwezig(examenKeuze)) {
+            System.out.print("Ongeldige invoer, probeer het nog een keer: ");
+            examenKeuze = reader.nextLine();
+            isExamenKeuzeAanwezig(examenKeuze);
+        }
 
-            while (studentNummer.matches("^[a-zA-Z]+$")) {
-                System.out.println("Vul uw studentnummer in");
-                studentNummer = reader.next();
-            }
+        // Geef aan welk examen een student gaat maken tijdens deze afname.
+        poging.setVan(afTeNemenExamen);
 
-            // TODO : studentNummer <= 8
+        // Gebruiker zichzelf selecteren.
+        identiteitStudentKiezen();
 
-            if (!StudentenLijst.contains(studentNummer)) {
-                System.out.println("Vul uw naam in");
+        // Start het examen.
+        examenAfnemen();
+    }
 
-                String studentNaam = reader.nextLine();
+    /**
+     * Deze methode legt het examen af.
+     */
+    private void examenAfnemen() {
+        int behaaldePunten = 0;
 
-                while (!studentNaam.matches("^[a-zA-Z]+$")) {
-                    System.out.println("Vul uw naam in");
-                    studentNaam = reader.next();
+        for (Vraag vraag : afTeNemenExamen.getVragen()) {
+            // Stel de vraag.
+            System.out.println(vraag.getVraag());
+
+            // Als het een meerkeuze vraag is, toon de keuzes.
+            if (vraag.getKeuzes() != null) {
+                for (String keuze : vraag.getKeuzes()) {
+                    System.out.println(keuze);
                 }
+            }
 
-                StudentenLijst.add(studentNummer + " " + studentNaam);
-                System.out.println(studentNaam + ", U bent succesvol ingeschreven.");
-                break;
-            } else {
-                System.out.println("Dit studentennummer is al ingeschreven, probeer het opnieuw.");
+            // Gebruiker geeft antwoord.
+            System.out.print("Jouw antwoord: ");
+            String antwoord = reader.nextLine();
+
+            // Als een antwoord goed is, tel het op bij behaalde punten.
+            if (vraag.getAntwoord().equals(antwoord)) {
+                behaaldePunten += vraag.getPunten();
+            }
+        }
+
+        // Bij een voldoende, zet geslaagd op true.
+        if (behaaldePunten >= poging.getVoldoendeBij()) {
+            poging.setGeslaagd(true);
+        }
+
+        // Voeg de poging toe bij student.
+        // Zodat je later kan zien hoeveel pogingen er gedaan zijn en
+        // hoeveel daarvan een voldoende zijn.
+        examenNemer.voegToeAanAfnamen(poging);
+    }
+
+    /**
+     * Deze methode checkt of de ingevoerde examen aanwezig is in het programma.
+     * @param examenKeuze - invoer van gebruiker
+     * @return true of false
+     */
+    private boolean isExamenKeuzeAanwezig(String examenKeuze) {
+        boolean r = false;
+        for (Examen examen : alleExamens) {
+            if (examen.getNaam().equals(examenKeuze)) {
+                afTeNemenExamen = examen;
+                r = true;
+            }
+        }
+        return r;
+    }
+
+    /**
+     * Gebruiker kan zichzelf kiezen.
+     */
+    private void identiteitStudentKiezen() {
+        // Vervolgens, toon de lijst met alle ingeschreven studenten.
+        showStudentenLijst();
+
+        // Student kan aan de hand van het nummertje voor hun naam zichzelf kiezen.
+        System.out.print("Wie ben je? Voer het nummer voor je naam in: ");
+        int studentKeuze = reader.nextInt();
+        reader.nextLine();
+
+        // Als het nummer te laag of te hoog is, vraag opnieuw om invoer.
+        while (studentKeuze > studentenLijst.size() || studentKeuze <= 0) {
+            System.out.print("Ongeldige keuze, voer het nog een keer in: ");
+            studentKeuze = reader.nextInt();
+            reader.nextLine();
+        }
+
+        // Selecteer de student uit de lijst.
+        examenNemer = studentenLijst.get(studentKeuze - 1);
+    }
+
+    /**
+     * Laat zien waar de student voor geslaagd is.
+     */
+    private void studentGeslaagdVoor() {
+        identiteitStudentKiezen();
+
+        if (examenNemer.getAfnamen().isEmpty()) {
+            // Als de student nog geen examens heeft gedaan.
+            System.out.println("Je hebt nog geen examens gedaan.");
+        } else {
+            System.out.println("Aantal examens gedaan: " + examenNemer.getAfnamen().size());
+            System.out.println("Geslaagd voor: ");
+            for (Afname afname : examenNemer.getAfnamen()) {
+                if (afname.getGeslaagd()) {
+                    System.out.println(afname.getVan().getNaam());
+                }
             }
         }
     }
 
-    public void studentUitschrijven(){
-        System.out.println("Vul uw studentnummer in");
-        String studentNummer = reader.nextLine();
-
-        for (int i = 0; i < StudentenLijst.size(); i++) {
-            while (!StudentenLijst.contains(studentNummer)) {
-                System.out.println(StudentenLijst.get(i) + ", U bent succesvol uitgeschreven.");
-                StudentenLijst.remove(i);
-                System.out.println(StudentenLijst); // Check, can be removed later
-            }
+    /**
+     * Gebruiker moet eerst een studentennummer invullen.
+     * Daarna hun naam.
+     */
+    public void studentInschrijven() {
+        System.out.print("Vul jouw naam in: ");
+        String studentenNaam = reader.nextLine().trim();
+        while (!studentenNaam.matches("^[a-zA-Z ]+$")) {
+            System.out.print("Niet toegestaan, vul je naam nog een keer in: ");
+            studentenNaam = reader.nextLine().trim();
         }
-        if (!StudentenLijst.contains(studentNummer)) {
-            System.out.println("U was niet ingeschreven");
+
+        System.out.print("Vul jouw studentennummer in: ");
+        String studentenNummer = reader.nextLine().trim();
+        while (studentenNummer.matches("^[a-zA-Z]+$") || !Student.checkLengteStudentenNummer(studentenNummer)) {
+            System.out.print("Niet toegestaan, vul het nog een keer in: ");
+            studentenNummer = reader.nextLine().trim();
+        }
+
+        Student student = new Student(studentenNaam, studentenNummer);
+        studentenLijst.add(student);
+    }
+
+    /**
+     * Gebruiker kan op naam zich/haarzelf uitschrijven.
+     */
+    public void studentUitschrijven() {
+        if (studentenLijst.size() != 0) {
+            System.out.print("Vul jouw naam in: ");
+            String studentenNaam = reader.nextLine();
+            if (studentenLijst.removeIf(student -> student.getNaam().equals(studentenNaam))) {
+                System.out.println("Succesvol uitgeschreven.");
+            } else {
+                System.out.println("Er ging wat mis.");
+                studentUitschrijven();
+            }
+        } else {
+            System.out.println("Geen studenten om uit te schrijven.");
         }
     }
 }

@@ -24,7 +24,7 @@ public class Vraagtest {
         keuzes.add("B. Venus");
         keuzes.add("C. Aarde");
         keuzes.add("D. Pluto");
-        Vraag nummer = new Vraag("Hoe heet de 3e planeet van ons zonnestelsel?",keuzes, 'C', 10);
+        Vraag nummer = new Vraag("Hoe heet de 3e planeet van ons zonnestelsel?",keuzes, "C", 10);
         Assertions.assertEquals(keuzes, nummer.getKeuzes());
         System.out.println(keuzes);
     }
@@ -36,8 +36,8 @@ public class Vraagtest {
         keuzes.add("B. Venus");
         keuzes.add("C. Aarde");
         keuzes.add("D. Pluto");
-        Vraag vraag = new Vraag("Hoe heet de 3e planeet van ons zonnestelsel?", keuzes, 'C', 10);
-        Assertions.assertEquals("Hoe heet de 3e planeet van ons zonnestelsel?", vraag.getMcvraag());
+        Vraag vraag = new Vraag("Hoe heet de 3e planeet van ons zonnestelsel?", keuzes, "C", 10);
+        Assertions.assertEquals("Hoe heet de 3e planeet van ons zonnestelsel?", vraag.getVraag());
     }
 
     @Test
@@ -47,8 +47,8 @@ public class Vraagtest {
         keuzes.add("B. Venus");
         keuzes.add("C. Aarde");
         keuzes.add("D. Pluto");
-        Vraag antwoord = new Vraag("Hoe heet de 3e planeet van ons zonnestelsel?", keuzes,'C', 10);
-        Assertions.assertEquals('C', antwoord.getMcantwoord());
+        Vraag antwoord = new Vraag("Hoe heet de 3e planeet van ons zonnestelsel?", keuzes, "C", 10);
+        Assertions.assertEquals("C", antwoord.getAntwoord());
     }
 
     @Test

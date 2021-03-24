@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public class Vraag {
     private String vraag;
     private String antwoord;
-    private String mcvraag;
-    private char mcantwoord;
+//    private String mcvraag;
+//    private char mcantwoord;
     private int punten;
     private ArrayList<String> keuzes;
 
@@ -19,10 +19,10 @@ public class Vraag {
 
     }
 
-    public Vraag(String mcvraag, ArrayList<String> keuzes, char mcantwoord, int punten){
+    public Vraag(String vraag, ArrayList<String> keuzes, String antwoord, int punten){
         this.keuzes = keuzes;
-        this.mcvraag = mcvraag;
-        this.mcantwoord = mcantwoord;
+        this.vraag = vraag;
+        this.antwoord = antwoord;
         this.punten = punten;
 
     }
@@ -47,16 +47,16 @@ public class Vraag {
     public ArrayList<Vraag> MCVragen() {
         ArrayList<Vraag> mc = new ArrayList<>();
 
-        mc.add(new Vraag("Hoeveel Megabytes is 1 Gigabyte?", opties("1000", "10", "100","1"), 'A', 10));
-        mc.add(new Vraag( "Welke smartphone bedrijf behoort niet tot China?", opties("Huawei", "Samsung", "Honor", "Xiaomi"),'B', 10));
-        mc.add(new Vraag( "Wat is de hoofdstad van Nederland?", opties("Den Haag", "Amsterdam", "Rotterdam", "Giethoorn"),'B', 10));
-        mc.add(new Vraag("Wat is de functie van campers?", opties("Trollen", "Uitschelden", "Helpen", "Boosten"), 'A', 10));
-        mc.add(new Vraag( "Welke van de 4 personen is de rijkste man ter wereld?", opties("Elon Musk", "Bill Gates", "Jeff Bezos", "Mark Zuckerberg"),'C', 10));
-        mc.add(new Vraag( "Welk land werd de 1e die wiet legaliseerde?", opties("Amerika", "Nederland", "Canada", "Singapore"),'C', 10));
-        mc.add(new Vraag( "Welke programmeertaal wordt gebruikt voor het bouwen van een website?", opties("Java", "Python", "HTML/CSS", "C#"),'C', 10));
-        mc.add(new Vraag( "Welk land behoort niet tot Zuid-Amerika?", opties("Venezuela", "Colombia", "Chile", "Indian"),'D', 10));
-        mc.add(new Vraag( "Wie heeft de wereldrecord als de snelste man ter wereld?", opties("Florence Griffith-Joyner", "Usian Bolt", "Tyson Gay", "Mike Rodgers"),'B', 10));
-        mc.add(new Vraag( "Hoe heet de zoon van god?",opties("Jezus Christus","Keanu Reeves","Penquinz0","Lucifer Morningstar"), 'A', 10));
+        mc.add(new Vraag("Hoeveel Megabytes is 1 Gigabyte?", opties("1000", "10", "100","1"), "A", 10));
+        mc.add(new Vraag( "Welke smartphone bedrijf behoort niet tot China?", opties("Huawei", "Samsung", "Honor", "Xiaomi"), "B", 10));
+        mc.add(new Vraag( "Wat is de hoofdstad van Nederland?", opties("Den Haag", "Amsterdam", "Rotterdam", "Giethoorn"), "B", 10));
+        mc.add(new Vraag("Wat is de functie van campers?", opties("Trollen", "Uitschelden", "Helpen", "Boosten"), "A", 10));
+        mc.add(new Vraag( "Welke van de 4 personen is de rijkste man ter wereld?", opties("Elon Musk", "Bill Gates", "Jeff Bezos", "Mark Zuckerberg"), "C", 10));
+        mc.add(new Vraag( "Welk land werd de 1e die wiet legaliseerde?", opties("Amerika", "Nederland", "Canada", "Singapore"), "C", 10));
+        mc.add(new Vraag( "Welke programmeertaal wordt gebruikt voor het bouwen van een website?", opties("Java", "Python", "HTML/CSS", "C#"), "C", 10));
+        mc.add(new Vraag( "Welk land behoort niet tot Zuid-Amerika?", opties("Venezuela", "Colombia", "Chile", "Indian"), "D", 10));
+        mc.add(new Vraag( "Wie heeft de wereldrecord als de snelste man ter wereld?", opties("Florence Griffith-Joyner", "Usian Bolt", "Tyson Gay", "Mike Rodgers"), "B", 10));
+        mc.add(new Vraag( "Hoe heet de zoon van god?",opties("Jezus Christus","Keanu Reeves","Penquinz0","Lucifer Morningstar"), "A", 10));
 
         return mc;
     }
@@ -77,9 +77,9 @@ public class Vraag {
 
     public ArrayList<String> getKeuzes() { return keuzes; }
 
-    public String getMcvraag() { return mcvraag; }
-
-    public char getMcantwoord() { return mcantwoord; }
+//    public String getMcvraag() { return mcvraag; }
+//
+//    public char getMcantwoord() { return mcantwoord; }
 
     public int getPunten() { return punten; }
 }
