@@ -230,13 +230,26 @@ public class Menu {
 
         System.out.print("Vul jouw studentennummer in: ");
         String studentenNummer = reader.nextLine().trim();
-        while (studentenNummer.matches("^[a-zA-Z]+$") || !Student.checkLengteStudentenNummer(studentenNummer)) {
+
+        while (studentenNummer.matches("^[a-zA-Z]+$") || !Student.checkLengteStudentenNummer(studentenNummer) || isStudentenNummerUniek(studentenNummer)) {
             System.out.print("Niet toegestaan, vul het nog een keer in: ");
             studentenNummer = reader.nextLine().trim();
         }
 
         Student student = new Student(studentenNaam, studentenNummer);
         studentenLijst.add(student);
+    }
+
+    private boolean isStudentenNummerUniek(String studentenNummer) {
+        boolean isUniek = false;
+        for (Student student : studentenLijst) {
+            if (student.getStudentenNummer().equals(studentenNummer)) {
+                isUniek = true;
+                break;
+            }
+        }
+
+        return isUniek;
     }
 
     /**
