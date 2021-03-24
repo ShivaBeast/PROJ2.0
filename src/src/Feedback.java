@@ -4,4 +4,11 @@ public class Feedback {
     Feedback(Examen examen){
         this.examen = examen;
     }
+
+    public boolean isVoldoende(int aantalGoed, int voldoendeBij){
+        if (aantalGoed >= voldoendeBij){
+            return true;
+        }
+        return false;
+    }
 }
