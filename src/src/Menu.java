@@ -132,6 +132,4 @@ public class Menu {
     public void examenAfnemen(){
         //TODO functie afmaken
     }
-
-    //TODO checken hoe we gaan inloggen
 }

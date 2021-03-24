@@ -5,6 +5,10 @@ public class ExamenAdministratie {
     private Scanner reader = new Scanner(System.in);
 
     public void start() {
+
+        Student student = new Student();
+        student.inloggen();
+
         menu.showMenu();
         String keuze = reader.nextLine();
 
