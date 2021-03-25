@@ -11,7 +11,7 @@ public class Menu {
 
     private Examen afTeNemenExamen = new Examen();
     private Student examenNemer = new Student();
-    private Feedback poging = new Feedback(false, 55);
+    private Poging poging = new Poging(false);
 
     // Deze methode toont het menu
     public void showMenu() {
@@ -111,7 +111,7 @@ public class Menu {
         }
 
         // Geef aan welk examen een student gaat maken tijdens deze afname.
-        poging.setOp(afTeNemenExamen);
+        poging.setExamen(afTeNemenExamen);
 
         // Gebruiker zichzelf selecteren.
         identiteitStudentKiezen();
@@ -124,7 +124,8 @@ public class Menu {
      * Deze methode legt het examen af.
      */
     public void examenAfnemen() {
-        int behaaldePunten = 0;
+        poging.setBehaaldePunten(0);
+        int behaaldePunten = poging.getBehaaldePunten();
 
         // Vragen random stellen.
         ArrayList<Vraag> examenVragen = afTeNemenExamen.getVragen();
@@ -152,14 +153,18 @@ public class Menu {
         }
 
         // Bij een voldoende, zet geslaagd op true.
-        if (behaaldePunten >= poging.getVoldoendeBij()) {
+        if (poging.isStudentGeslaagd(behaaldePunten)) {
             poging.setGeslaagd(true);
+            System.out.println("Je bent geslaagd met " + behaaldePunten + " punten.");
+        } else {
+            System.out.println("Je bent gezakt met " + behaaldePunten + " punten.");
         }
+        poging.setBehaaldePunten(behaaldePunten);
 
         // Voeg de poging toe bij student.
         // Zodat je later kan zien hoeveel pogingen er gedaan zijn en
         // hoeveel daarvan een voldoende zijn.
-        examenNemer.voegFeedbackToe(poging);
+        Poging.voegToeAanPogingen(poging);
     }
 
     /**
@@ -199,6 +204,7 @@ public class Menu {
 
         // Selecteer de student uit de lijst.
         examenNemer = studentenLijst.get(studentKeuze - 1);
+        poging.setStudent(examenNemer);
     }
 
     /**
@@ -207,16 +213,10 @@ public class Menu {
     public void studentGeslaagdVoor() {
         identiteitStudentKiezen();
 
-        if (examenNemer.getKrijgt().isEmpty()) {
-            // Als de student nog geen examens heeft gedaan.
-            System.out.println("Je hebt nog geen examens gedaan.");
-        } else {
-            System.out.println("Aantal examens gedaan: " + examenNemer.getKrijgt().size());
-            System.out.println("Geslaagd voor: ");
-            for (Feedback feedback : examenNemer.getKrijgt()) {
-                if (feedback.getGeslaagd()) {
-                    System.out.println(feedback.getOp().getNaam());
-                }
+        System.out.println("Je bent geslaagd voor: ");
+        for (Poging poging : Poging.getPogingenVanStudenten()) {
+            if (poging.getStudent().equals(examenNemer) && poging.getGeslaagd()) {
+                System.out.println(poging.getExamen().getNaam());
             }
         }
     }
