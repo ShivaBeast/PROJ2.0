@@ -22,21 +22,4 @@ public class ExamenVerzameling {
         return alleExamens;
     }
 
-    /**
-     * Voegt een examen toe.
-     *
-     * @param examen - De toe te voegen examen.
-     */
-    public void voegExamenToe(Examen examen) {
-        alleExamens.add(examen);
-    }
-
-    /**
-     * Verwijdert een examen.
-     *
-     * @param examenNaam - Naam van de ongewenste examen.
-     */
-    public void verwijderExamen(String examenNaam) {
-        alleExamens.removeIf(examen -> examen.getNaam().equals(examenNaam));
-    }
 }

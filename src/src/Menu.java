@@ -11,7 +11,7 @@ public class Menu {
 
     private Examen afTeNemenExamen = new Examen();
     private Student examenNemer = new Student();
-    private Feedback poging = new Feedback(false, 55);
+    private Feedback poging = new Feedback(false);
 
     // Deze methode toont het menu
     public void showMenu() {
@@ -124,7 +124,8 @@ public class Menu {
      * Deze methode legt het examen af.
      */
     public void examenAfnemen() {
-        int behaaldePunten = 0;
+        poging.setBehaaldePunten(0);
+        int behaaldePunten = poging.getBehaaldePunten();
 
         // Vragen random stellen.
         ArrayList<Vraag> examenVragen = afTeNemenExamen.getVragen();
@@ -152,9 +153,13 @@ public class Menu {
         }
 
         // Bij een voldoende, zet geslaagd op true.
-        if (behaaldePunten >= poging.getVoldoendeBij()) {
+        if (poging.isStudentGeslaagd(behaaldePunten)) {
             poging.setGeslaagd(true);
+            System.out.println("Je bent geslaagd met " + behaaldePunten + " punten.");
+        } else {
+            System.out.println("Je bent gezakt met " + behaaldePunten + " punten.");
         }
+        poging.setBehaaldePunten(behaaldePunten);
 
         // Voeg de poging toe bij student.
         // Zodat je later kan zien hoeveel pogingen er gedaan zijn en
@@ -215,7 +220,7 @@ public class Menu {
             System.out.println("Geslaagd voor: ");
             for (Feedback feedback : examenNemer.getKrijgt()) {
                 if (feedback.getGeslaagd()) {
-                    System.out.println(feedback.getOp().getNaam());
+                    System.out.println(feedback.getOp().getNaam() + " " + feedback.getBehaaldePunten() + " punten");
                 }
             }
         }
