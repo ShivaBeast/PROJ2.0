@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -10,7 +11,7 @@ public class Menu {
 
     private Examen afTeNemenExamen = new Examen();
     private Student examenNemer = new Student();
-    private Afname poging = new Afname(false, 55);
+    private Feedback poging = new Feedback(false, 55);
 
     // Deze methode toont het menu
     public void showMenu() {
@@ -23,8 +24,8 @@ public class Menu {
         System.out.println("\n1. Lijst met examens");
         System.out.println("2. Lijst met studenten");
         System.out.println("3. Student inschrijven");
-        System.out.println("4. Student Uitschrijven");
-        System.out.println("5. Welke examens heeft student gehaald?");
+        System.out.println("4. Student uitschrijven");
+        System.out.println("5. Welke examens heeft een student gehaald?");
         System.out.println("6. Welke student heeft de meeste examens gehaald?");
         System.out.println("7. Examen afnemen");
         System.out.println("8. Afsluiten");
@@ -110,7 +111,7 @@ public class Menu {
         }
 
         // Geef aan welk examen een student gaat maken tijdens deze afname.
-        poging.setVan(afTeNemenExamen);
+        poging.setOp(afTeNemenExamen);
 
         // Gebruiker zichzelf selecteren.
         identiteitStudentKiezen();
@@ -122,10 +123,14 @@ public class Menu {
     /**
      * Deze methode legt het examen af.
      */
-    private void examenAfnemen() {
+    public void examenAfnemen() {
         int behaaldePunten = 0;
 
-        for (Vraag vraag : afTeNemenExamen.getVragen()) {
+        // Vragen random stellen.
+        ArrayList<Vraag> examenVragen = afTeNemenExamen.getVragen();
+        Collections.shuffle(examenVragen);
+
+        for (Vraag vraag : examenVragen) {
             // Stel de vraag.
             System.out.println(vraag.getVraag());
 
@@ -154,7 +159,7 @@ public class Menu {
         // Voeg de poging toe bij student.
         // Zodat je later kan zien hoeveel pogingen er gedaan zijn en
         // hoeveel daarvan een voldoende zijn.
-        examenNemer.voegToeAanAfnamen(poging);
+        examenNemer.voegFeedbackToe(poging);
     }
 
     /**
@@ -162,7 +167,7 @@ public class Menu {
      * @param examenKeuze - invoer van gebruiker
      * @return true of false
      */
-    private boolean isExamenKeuzeAanwezig(String examenKeuze) {
+    public boolean isExamenKeuzeAanwezig(String examenKeuze) {
         boolean r = false;
         for (Examen examen : alleExamens) {
             if (examen.getNaam().equals(examenKeuze)) {
@@ -176,7 +181,7 @@ public class Menu {
     /**
      * Gebruiker kan zichzelf kiezen.
      */
-    private void identiteitStudentKiezen() {
+    public void identiteitStudentKiezen() {
         // Vervolgens, toon de lijst met alle ingeschreven studenten.
         showStudentenLijst();
 
@@ -199,18 +204,18 @@ public class Menu {
     /**
      * Laat zien waar de student voor geslaagd is.
      */
-    private void studentGeslaagdVoor() {
+    public void studentGeslaagdVoor() {
         identiteitStudentKiezen();
 
-        if (examenNemer.getAfnamen().isEmpty()) {
+        if (examenNemer.getKrijgt().isEmpty()) {
             // Als de student nog geen examens heeft gedaan.
             System.out.println("Je hebt nog geen examens gedaan.");
         } else {
-            System.out.println("Aantal examens gedaan: " + examenNemer.getAfnamen().size());
+            System.out.println("Aantal examens gedaan: " + examenNemer.getKrijgt().size());
             System.out.println("Geslaagd voor: ");
-            for (Afname afname : examenNemer.getAfnamen()) {
-                if (afname.getGeslaagd()) {
-                    System.out.println(afname.getVan().getNaam());
+            for (Feedback feedback : examenNemer.getKrijgt()) {
+                if (feedback.getGeslaagd()) {
+                    System.out.println(feedback.getOp().getNaam());
                 }
             }
         }
@@ -230,13 +235,31 @@ public class Menu {
 
         System.out.print("Vul jouw studentennummer in: ");
         String studentenNummer = reader.nextLine().trim();
-        while (studentenNummer.matches("^[a-zA-Z]+$") || !Student.checkLengteStudentenNummer(studentenNummer)) {
+
+        while (studentenNummer.matches("^[a-zA-Z]+$") || !Student.checkLengteStudentenNummer(studentenNummer) || isStudentenNummerUniek(studentenNummer)) {
             System.out.print("Niet toegestaan, vul het nog een keer in: ");
             studentenNummer = reader.nextLine().trim();
         }
 
         Student student = new Student(studentenNaam, studentenNummer);
         studentenLijst.add(student);
+    }
+
+    /**
+     * Check of een studentennummer uniek is.
+     * @param studentenNummer - studentennummer
+     * @return true of false
+     */
+    public boolean isStudentenNummerUniek(String studentenNummer) {
+        boolean isUniek = false;
+        for (Student student : studentenLijst) {
+            if (student.getStudentenNummer().equals(studentenNummer)) {
+                isUniek = true;
+                break;
+            }
+        }
+
+        return isUniek;
     }
 
     /**

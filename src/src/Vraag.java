@@ -3,8 +3,6 @@ import java.util.ArrayList;
 public class Vraag {
     private String vraag;
     private String antwoord;
-//    private String mcvraag;
-//    private char mcantwoord;
     private int punten;
     private ArrayList<String> keuzes;
 
@@ -61,7 +59,7 @@ public class Vraag {
         return mc;
     }
 
-    public ArrayList<String> opties(String A, String B, String C, String D){
+    public ArrayList<String> opties(String A, String B, String C, String D) {
         ArrayList<String> keuzes = new ArrayList<String>();
         keuzes.add("A. " + A);
         keuzes.add("B. " + B);
@@ -76,10 +74,6 @@ public class Vraag {
     public String getAntwoord() { return antwoord; }
 
     public ArrayList<String> getKeuzes() { return keuzes; }
-
-//    public String getMcvraag() { return mcvraag; }
-//
-//    public char getMcantwoord() { return mcantwoord; }
 
     public int getPunten() { return punten; }
 }
