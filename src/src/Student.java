@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Student {
     private String naam;
     private String studentenNummer;
-    private ArrayList<Afname> afnamen = new ArrayList<Afname>();
+    private ArrayList<Feedback> krijgt = new ArrayList<Feedback>();
 
     public Student(String naam,String studentenNummer){
         this.naam = naam;
@@ -18,16 +18,16 @@ public class Student {
         return studentenNummer.length() > 0 && studentenNummer.length() <= 8;
     }
 
-    public void setAfname(ArrayList<Afname> afnamen) {
-        this.afnamen = afnamen;
+    public void setKrijgt(ArrayList<Feedback> krijgt) {
+        this.krijgt = krijgt;
     }
 
-    public ArrayList<Afname> getAfnamen() {
-        return afnamen;
+    public ArrayList<Feedback> getKrijgt() {
+        return krijgt;
     }
 
-    public void voegToeAanAfnamen(Afname afname) {
-        afnamen.add(afname);
+    public void voegFeedbackToe(Feedback feedback) {
+        krijgt.add(feedback);
     }
 
     public String getNaam(){
