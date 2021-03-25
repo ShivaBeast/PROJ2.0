@@ -28,8 +28,8 @@ public class Feedback {
         op = examen;
     }
 
-    public boolean isVoldoende(int aantalGoed, int voldoendeBij){
-        if (aantalGoed >= voldoendeBij){
+    public boolean isGeslaagd(int aantalGoed){
+        if (aantalGoed >= 55){
             return true;
         }
         return false;
