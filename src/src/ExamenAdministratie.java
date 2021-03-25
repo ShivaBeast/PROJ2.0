@@ -8,16 +8,15 @@ public class ExamenAdministratie {
         menu.showMenu();
         String keuze = reader.nextLine();
 
-        while (!keuze.equals("8")){
+        while (!keuze.equals("8")) {
             menu.getChoice(keuze);
-            System.out.println("\nDruk op een toets om door te gaan...");
-            reader.nextLine();
-            menu.showMenu();
+            System.out.print("\nVoer je keuze in: ");
             keuze = reader.nextLine();
-
         }
+
         stop();
     }
+
     private void stop() {
         System.out.println("Exit");
     }

@@ -1,47 +1,40 @@
-import java.util.Scanner;
+import java.util.ArrayList;
 
+public class Student {
+    private String naam;
+    private String studentenNummer;
+    private ArrayList<Feedback> krijgt = new ArrayList<Feedback>();
 
-class Student {
-    public static void main(String[] args) {
-        Student student = new Student();
-        student.inloggen();
-    }
-    private String name;
-    private String studentNummer;
-
-    public Student(String name,String studentNummer){
-        this.name = name;
-        this.studentNummer = studentNummer;
+    public Student(String naam,String studentenNummer){
+        this.naam = naam;
+        this.studentenNummer = studentenNummer;
     }
 
-    public Student(){
-    };
-
-    public String getName(){
-        return this.name;
+    public Student() {
+        this("", "");
     }
 
-    public String getStudentNummer() {
-        return this.studentNummer;
+    public static boolean checkLengteStudentenNummer(String studentenNummer) {
+        return studentenNummer.length() > 0 && studentenNummer.length() <= 8;
     }
 
-    public void inloggen() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Voer je naam in: ");
-        this.name = scanner.nextLine();
-        System.out.println("Voer je studentnummer in: ");
-        this.studentNummer = scanner.nextLine();
-        while(!checkStudentNummerLength(this.studentNummer)){
-            System.out.println("Een student nummer is 1 - 8 karakters lang. Voer opnieuw in: ");
-            this.studentNummer = scanner.nextLine();
-         }
-        System.out.printf("Inloggen succcesvol. Naam: %s, studentnummer: %s",this.name,this.studentNummer);
+    public void setKrijgt(ArrayList<Feedback> krijgt) {
+        this.krijgt = krijgt;
     }
 
-    public boolean checkStudentNummerLength(String studentNummer){
-        if(studentNummer.length() <= 0 || studentNummer.length() > 8){
-            return false;
-        }
-        return true;
+    public ArrayList<Feedback> getKrijgt() {
+        return krijgt;
+    }
+
+    public void voegFeedbackToe(Feedback feedback) {
+        krijgt.add(feedback);
+    }
+
+    public String getNaam(){
+        return naam;
+    }
+
+    public String getStudentenNummer() {
+        return studentenNummer;
     }
 }
