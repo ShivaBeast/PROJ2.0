@@ -11,7 +11,7 @@ public class Menu {
 
     private Examen afTeNemenExamen = new Examen();
     private Student examenNemer = new Student();
-    private Feedback poging = new Feedback(false);
+    private Poging poging = new Poging(false);
 
     // Deze methode toont het menu
     public void showMenu() {
@@ -111,7 +111,7 @@ public class Menu {
         }
 
         // Geef aan welk examen een student gaat maken tijdens deze afname.
-        poging.setOp(afTeNemenExamen);
+        poging.setExamen(afTeNemenExamen);
 
         // Gebruiker zichzelf selecteren.
         identiteitStudentKiezen();
@@ -164,7 +164,7 @@ public class Menu {
         // Voeg de poging toe bij student.
         // Zodat je later kan zien hoeveel pogingen er gedaan zijn en
         // hoeveel daarvan een voldoende zijn.
-        examenNemer.voegFeedbackToe(poging);
+        Poging.voegToeAanPogingen(poging);
     }
 
     /**
@@ -204,6 +204,7 @@ public class Menu {
 
         // Selecteer de student uit de lijst.
         examenNemer = studentenLijst.get(studentKeuze - 1);
+        poging.setStudent(examenNemer);
     }
 
     /**
@@ -212,16 +213,10 @@ public class Menu {
     public void studentGeslaagdVoor() {
         identiteitStudentKiezen();
 
-        if (examenNemer.getKrijgt().isEmpty()) {
-            // Als de student nog geen examens heeft gedaan.
-            System.out.println("Je hebt nog geen examens gedaan.");
-        } else {
-            System.out.println("Aantal examens gedaan: " + examenNemer.getKrijgt().size());
-            System.out.println("Geslaagd voor: ");
-            for (Feedback feedback : examenNemer.getKrijgt()) {
-                if (feedback.getGeslaagd()) {
-                    System.out.println(feedback.getOp().getNaam() + " " + feedback.getBehaaldePunten() + " punten");
-                }
+        System.out.println("Je bent geslaagd voor: ");
+        for (Poging poging : Poging.getPogingenVanStudenten()) {
+            if (poging.getStudent().equals(examenNemer) && poging.getGeslaagd()) {
+                System.out.println(poging.getExamen().getNaam());
             }
         }
     }
