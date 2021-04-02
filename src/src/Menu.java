@@ -5,13 +5,9 @@ import java.util.Scanner;
 
 public class Menu {
     private final Scanner reader = new Scanner(System.in);
-
     private ArrayList<Student> studentenLijst = new ArrayList<Student>();
     private ExamenVerzameling examenVerzameling = new ExamenVerzameling();
     private ArrayList<Examen> alleExamens = examenVerzameling.getAlleExamens();
-
-
-
     private Examen afTeNemenExamen = new Examen();
     private Student examenNemer = new Student();
     private Poging poging = new Poging(false);

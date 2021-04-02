@@ -18,15 +18,15 @@ class MenuTest {
         Menu menu1 = new Menu();
         ArrayList<Student> studentenLijst = new ArrayList<Student>();
 
-        Student student = new Student("Wishal Toekoen", "19105843");
+        Student student1 = new Student("Wishal Toekoen", "19105843");
         Student student2 = new Student("Rowin Hartog", "20581919");
-        studentenLijst.add(student);
+        studentenLijst.add(student1);
         studentenLijst.add(student2);
 
         menu1.setStudentenLijst(studentenLijst);
-        Assertions.assertEquals("\n" +
-                "[1] Wishal Toekoen 19105843\n" +
-                "[2] Rowin Hartog 20581919", menu1.showStudentenLijst());
+        Assertions.assertEquals
+                ("\n[1] Wishal Toekoen 19105843\n" + "[2] Rowin Hartog 20581919", menu1.showStudentenLijst());
+
     }
 
     @Test
