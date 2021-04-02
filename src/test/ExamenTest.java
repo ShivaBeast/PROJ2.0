@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-public class TestExamen {
+public class ExamenTest {
     // TODO: tests maken
 
     @Test

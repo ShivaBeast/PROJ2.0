@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-public class testCheckStudentNummerLength {
+public class StudentTest {
 
     @Test
     public void testCheckStudentNummerLength_InputZero_ReturnsFalse() {
@@ -43,5 +43,11 @@ public class testCheckStudentNummerLength {
         String input = "12345671234567123456712";
         boolean result = Student.checkLengteStudentenNummer(input);
         Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testGetNaam(){
+        Student student = new Student("","");
+        Assertions.assertEquals("", student.getNaam());
     }
 }
