@@ -5,9 +5,12 @@ import java.util.Scanner;
 
 public class Menu {
     private final Scanner reader = new Scanner(System.in);
+
     private ArrayList<Student> studentenLijst = new ArrayList<Student>();
     private ExamenVerzameling examenVerzameling = new ExamenVerzameling();
     private ArrayList<Examen> alleExamens = examenVerzameling.getAlleExamens();
+
+
 
     private Examen afTeNemenExamen = new Examen();
     private Student examenNemer = new Student();
@@ -39,7 +42,7 @@ public class Menu {
                 showExamens();
                 break;
             case "2":
-                showStudentenLijst();
+                System.out.println(showStudentenLijst());
                 break;
             case "3":
                 studentInschrijven();
@@ -84,10 +87,15 @@ public class Menu {
         }
     }
 
-    public void showStudentenLijst() {
+    public void setStudentenLijst(ArrayList<Student> studentenLijst) {
+        this.studentenLijst = studentenLijst;
+    }
+
+    public String showStudentenLijst() {
+        String students = "";
         for (int i = 0; i < studentenLijst.size(); i++) {
-            System.out.println("[" + (i+1) + "]" + " " + studentenLijst.get(i).getNaam() + " " + studentenLijst.get(i).getStudentenNummer());
-        }
+            students += "\n[" + (i+1) + "]" + " " + studentenLijst.get(i).getNaam() + " " + studentenLijst.get(i).getStudentenNummer();
+        }return students;
     }
 
     /**
@@ -188,7 +196,7 @@ public class Menu {
      */
     public void identiteitStudentKiezen() {
         // Vervolgens, toon de lijst met alle ingeschreven studenten.
-        showStudentenLijst();
+        System.out.println(showStudentenLijst());
 
         // Student kan aan de hand van het nummertje voor hun naam zichzelf kiezen.
         System.out.print("Wie ben je? Voer het nummer voor je naam in: ");
@@ -243,6 +251,8 @@ public class Menu {
 
         Student student = new Student(studentenNaam, studentenNummer);
         studentenLijst.add(student);
+        System.out.print(student.getNaam() + " met nummer " + student.getStudentenNummer() + " is toegevoegd!\n");
+
     }
 
     /**
