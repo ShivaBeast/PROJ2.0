@@ -34,7 +34,7 @@ class MenuTest {
     }
 
     @Test
-    void statetiekStudent() {
+    void statestiekStudent() {
     }
 
     @Test
