@@ -36,10 +36,6 @@ public class Poging {
         this.behaaldePunten = behaaldePunten;
     }
 
-    public boolean isGeslaagd() {
-        return geslaagd;
-    }
-
     public Examen getExamen() {
         return examen;
     }

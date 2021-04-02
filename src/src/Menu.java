@@ -11,7 +11,7 @@ public class Menu {
 
     private Examen afTeNemenExamen = new Examen();
     private Student examenNemer = new Student();
-    private Poging poging = new Poging(false);
+    private Poging poging = null;
 
     // Deze methode toont het menu
     public void showMenu() {
@@ -51,7 +51,7 @@ public class Menu {
                 studentGeslaagdVoor();
                 break;
             case "6":
-                System.out.println("Student Wishal Heeft de meeste examens gehaald");
+                studentMetMeesteVoldoendes();
                 break;
             case "7":
                 // Als er geen studenten ingeschreven zijn, geef de optie om in te schrijven.
@@ -62,6 +62,7 @@ public class Menu {
                         studentInschrijven();
                     }
                 } else {
+                    poging = nieuwePoging();
                     infoVoorExamenDoen();
                 }
                 break;
@@ -90,6 +91,10 @@ public class Menu {
         }
     }
 
+    private Poging nieuwePoging() {
+        return new Poging(false);
+    }
+
     /**
      * Deze methode vergaart alle informatie die er nodig zijn om een examen te doen.
      * Er zal eerst gevraagd worden welk examen een student wil doen.
@@ -115,6 +120,7 @@ public class Menu {
 
         // Gebruiker zichzelf selecteren.
         identiteitStudentKiezen();
+        poging.setStudent(examenNemer);
 
         // Start het examen.
         examenAfnemen();
@@ -161,9 +167,6 @@ public class Menu {
         }
         poging.setBehaaldePunten(behaaldePunten);
 
-        // Voeg de poging toe bij student.
-        // Zodat je later kan zien hoeveel pogingen er gedaan zijn en
-        // hoeveel daarvan een voldoende zijn.
         Poging.voegToeAanPogingen(poging);
     }
 
@@ -204,7 +207,6 @@ public class Menu {
 
         // Selecteer de student uit de lijst.
         examenNemer = studentenLijst.get(studentKeuze - 1);
-        poging.setStudent(examenNemer);
     }
 
     /**
@@ -214,11 +216,15 @@ public class Menu {
         identiteitStudentKiezen();
 
         System.out.println("Je bent geslaagd voor: ");
-        for (Poging poging : Poging.getPogingenVanStudenten()) {
-            if (poging.getStudent().equals(examenNemer) && poging.getGeslaagd()) {
-                System.out.println(poging.getExamen().getNaam());
+        for (Poging p : Poging.getPogingenVanStudenten()) {
+            if (p.getStudent().equals(examenNemer) && p.getGeslaagd()) {
+                System.out.println(p.getExamen().getNaam() + ", " + p.getBehaaldePunten());
             }
         }
+    }
+
+    public void studentMetMeesteVoldoendes() {
+
     }
 
     /**
