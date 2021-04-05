@@ -1,24 +1,20 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Locale;
+import java.util.Scanner;
 
 public class Menu {
-    private final Scanner READER = new Scanner(System.in);
-
-    // Alle studenten.
-    private final ArrayList<Student> STUDENTENLIJST = new ArrayList<Student>();
-    
-    // Lijst met alle examens.
-    private final ExamenVerzameling EXAMENVERZAMELING = new ExamenVerzameling();
-    private final ArrayList<Examen> ALLEEXAMENS = EXAMENVERZAMELING.getAlleExamens();
-
+    private final Scanner reader = new Scanner(System.in);
+    private ArrayList<Student> studentenLijst = new ArrayList<Student>();
+    private ExamenVerzameling examenVerzameling = new ExamenVerzameling();
+    private ArrayList<Examen> alleExamens = examenVerzameling.getAlleExamens();
     private Examen afTeNemenExamen = new Examen();
     private Student examenNemer = new Student();
     private Poging poging = new Poging(false);
 
-    /**
-     * Deze methode toont het menu.
-     */
+    // Deze methode toont het menu
     public void showMenu() {
-        // ASCII text source: https://fsymbols.com/generators/carty/
+        //ASCII text source: https://fsymbols.com/generators/carty/
         System.out.println("\n" +
             "░█─░█ █▀▀█ █▀▀█ █▀▀▀ █▀▀ █▀▀ 　 ░█─░█ █▀▀█ █▀▀▀ █▀▀ 　 ░█▀▀▀█ █▀▀ █──█ █▀▀█ █▀▀█ █── \n" +
             "░█▀▀█ █▄▄█ █▄▄█ █─▀█ ▀▀█ █▀▀ 　 ░█▀▀█ █──█ █─▀█ █▀▀ 　 ─▀▀▀▄▄ █── █▀▀█ █──█ █──█ █── \n" +
@@ -35,17 +31,14 @@ public class Menu {
         System.out.print("Voer je keuze in: ");
     }
 
-    /**
-     * Deze methode krijgt de input van de gebruiker en stuurt hem naar het volgende scherm.
-     * @param keuze keuze van de gebruiker.
-     */
+    //Deze methode verkrijgt de invoer van de gebruiker en stuurt hem in het volgende scherm
     public void getChoice(String keuze) {
         switch (keuze) {
             case "1":
-                showExamens();
+                System.out.println(showExamens());
                 break;
             case "2":
-                showSTUDENTENLIJST();
+                System.out.println(showStudentenLijst());
                 break;
             case "3":
                 studentInschrijven();
@@ -65,9 +58,9 @@ public class Menu {
                 break;
             case "7":
                 // Als er geen studenten ingeschreven zijn, geef de optie om in te schrijven.
-                if (STUDENTENLIJST.isEmpty()) {
+                if (studentenLijst.isEmpty()) {
                     System.out.print("Er zijn geen studenten! Wil je je inschrijven? (Ja/Nee) ");
-                    String inschrijven = READER.nextLine().toLowerCase(Locale.ROOT);
+                    String inschrijven = reader.nextLine().toLowerCase(Locale.ROOT);
                     if (inschrijven.equals("ja")) {
                         studentInschrijven();
                     }
@@ -86,22 +79,24 @@ public class Menu {
     /**
      * Laat een lijst zien van alle examens die toegevoegd zijn aan het programma.
      */
-    public void showExamens() {
-        for (Examen examen : ALLEEXAMENS) {
-            System.out.println(
-                    "[Vak: " + examen.getNaam() + ", " +
-                    "Aantal vragen: " + examen.getVragen().size() + "]"
-            );
+    public String showExamens() {
+        String exams = "";
+        for (Examen examen : examenVerzameling.getAlleExamens()) {
+            exams += "[Vak: " + examen.getNaam() + ", " +
+                   "Aantal vragen: " + examen.getVragen().size() + "]\n";
         }
+        return exams;
     }
 
-    /**
-     * Laat een lijst zien van alle studenten in het programma.
-     */
-    public void showSTUDENTENLIJST() {
-        for (int i = 0; i < STUDENTENLIJST.size(); i++) {
-            System.out.println("[" + (i+1) + "]" + " " + STUDENTENLIJST.get(i).getNaam() + " " + STUDENTENLIJST.get(i).getStudentenNummer());
-        }
+    public void setStudentenLijst(ArrayList<Student> studentenLijst) {
+        this.studentenLijst = studentenLijst;
+    }
+
+    public String showStudentenLijst() {
+        String students = "";
+        for (int i = 0; i < studentenLijst.size(); i++) {
+            students += "\n[" + (i+1) + "]" + " " + studentenLijst.get(i).getNaam() + " " + studentenLijst.get(i).getStudentenNummer();
+        }return students;
     }
 
     /**
@@ -120,16 +115,16 @@ public class Menu {
      */
     public void infoVoorExamenDoen() {
         // Toon alle beschikbare examens.
-        showExamens();
+        System.out.println(showExamens());
 
         // Vraag welke de student wil doen.
         System.out.print("Welk examen wil je doen? Type de naam in: ");
-        String examenKeuze = READER.nextLine();
+        String examenKeuze = reader.nextLine();
 
         // Als het examen niet aanwezig is, wordt nog een keer om een invoer gevraagd.
         while (!isExamenKeuzeAanwezig(examenKeuze)) {
             System.out.print("Ongeldige invoer, probeer het nog een keer: ");
-            examenKeuze = READER.nextLine();
+            examenKeuze = reader.nextLine();
             isExamenKeuzeAanwezig(examenKeuze);
         }
 
@@ -168,7 +163,7 @@ public class Menu {
 
             // Gebruiker geeft antwoord.
             System.out.print("Jouw antwoord: ");
-            String antwoord = READER.nextLine();
+            String antwoord = reader.nextLine();
 
             // Als een antwoord goed is, tel het op bij behaalde punten.
             if (vraag.getAntwoord().equals(antwoord)) {
@@ -190,12 +185,12 @@ public class Menu {
 
     /**
      * Deze methode checkt of de ingevoerde examen aanwezig is in het programma.
-     * @param examenKeuze invoer van gebruiker.
+     * @param examenKeuze - invoer van gebruiker
      * @return true of false
      */
     public boolean isExamenKeuzeAanwezig(String examenKeuze) {
         boolean r = false;
-        for (Examen examen : ALLEEXAMENS) {
+        for (Examen examen : alleExamens) {
             if (examen.getNaam().equals(examenKeuze)) {
                 afTeNemenExamen = examen;
                 r = true;
@@ -208,23 +203,24 @@ public class Menu {
      * Gebruiker kan zichzelf kiezen.
      */
     public void identiteitStudentKiezen() {
-        // Toon de lijst met alle ingeschreven studenten.
-        showSTUDENTENLIJST();
+        // Vervolgens, toon de lijst met alle ingeschreven studenten.
+        System.out.println(showStudentenLijst());
 
         // Student kan aan de hand van het nummertje voor hun naam zichzelf kiezen.
         System.out.print("Wie ben je? Voer het nummer voor je naam in: ");
-        int studentKeuze = READER.nextInt();
-        READER.nextLine();
+        int studentKeuze = reader.nextInt();
+        reader.nextLine();
 
         // Als het nummer te laag of te hoog is, vraag opnieuw om invoer.
-        while (studentKeuze > STUDENTENLIJST.size() || studentKeuze <= 0) {
+        while (studentKeuze > studentenLijst.size() || studentKeuze <= 0) {
             System.out.print("Ongeldige keuze, voer het nog een keer in: ");
-            studentKeuze = READER.nextInt();
-            READER.nextLine();
+            studentKeuze = reader.nextInt();
+            reader.nextLine();
         }
 
         // Selecteer de student uit de lijst.
-        examenNemer = STUDENTENLIJST.get(studentKeuze - 1);
+        examenNemer = studentenLijst.get(studentKeuze - 1);
+        poging.setStudent(examenNemer);
     }
 
     /**
@@ -342,19 +338,19 @@ public class Menu {
         System.out.print("Vul jouw naam in: ");
 
         // Haal de whitespaces weg voor en na de naam.
-        String studentenNaam = READER.nextLine().trim();
+        String studentenNaam = reader.nextLine().trim();
 
         // Als de naam niet overeenkomt met de verwachte karakterpatroon
         // in dit geval: alfabetische karakters, dan wordt aan de gebruiker
         // nog een keer om input gevraagd.
         while (!studentenNaam.matches("^[a-zA-Z ]+$")) {
             System.out.print("Niet toegestaan, vul je naam nog een keer in: ");
-            studentenNaam = READER.nextLine().trim();
+            studentenNaam = reader.nextLine().trim();
         }
 
         // Vraag om de studentennummer.
         System.out.print("Vul jouw studentennummer in: ");
-        String studentenNummer = READER.nextLine().trim();
+        String studentenNummer = reader.nextLine().trim();
 
         // Hetzelfde als bij naam, maar hierbij wordt gecheckt of de input wel
         // overeenkomt met alfabetische karakters (want het moeten cijfers zijn).
@@ -362,22 +358,24 @@ public class Menu {
         // voorkomt in het programma.
         while (studentenNummer.matches("^[a-zA-Z]+$") || !Student.checkLengteStudentenNummer(studentenNummer) || isStudentenNummerUniek(studentenNummer)) {
             System.out.print("Niet toegestaan, vul het nog een keer in: ");
-            studentenNummer = READER.nextLine().trim();
+            studentenNummer = reader.nextLine().trim();
         }
 
         // Maak een nieuw studenten object aan en voeg het toe aan de STUDENTENLIJST.
         Student student = new Student(studentenNaam, studentenNummer);
-        STUDENTENLIJST.add(student);
+        studentenLijst.add(student);
+        System.out.print(student.getNaam() + " met nummer " + student.getStudentenNummer() + " is toegevoegd!\n");
+
     }
 
     /**
      * Check of een studentennummer uniek is.
-     * @param studentenNummer studentennummer van student.
+     * @param studentenNummer - studentennummer
      * @return true of false
      */
     public boolean isStudentenNummerUniek(String studentenNummer) {
         boolean isUniek = false;
-        for (Student student : STUDENTENLIJST) {
+        for (Student student : studentenLijst) {
             if (student.getStudentenNummer().equals(studentenNummer)) {
                 isUniek = true;
                 break;
@@ -391,13 +389,10 @@ public class Menu {
      * Gebruiker kan op naam zich/haarzelf uitschrijven.
      */
     public void studentUitschrijven() {
-        if (STUDENTENLIJST.size() != 0) {
-            // Als de lijst niet leeg is, vraag om input.
+        if (studentenLijst.size() != 0) {
             System.out.print("Vul jouw naam in: ");
-            String studentenNaam = READER.nextLine();
-
-            // Student wordt verwijderd met een "Predicative" (iets met logica).
-            if (STUDENTENLIJST.removeIf(student -> student.getNaam().equals(studentenNaam))) {
+            String studentenNaam = reader.nextLine();
+            if (studentenLijst.removeIf(student -> student.getNaam().equals(studentenNaam))) {
                 System.out.println("Succesvol uitgeschreven.");
             } else {
                 // Methode roept zichzelf nog een keer aan, als er wat fout ging.
