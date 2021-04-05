@@ -263,12 +263,13 @@ public class Menu {
      *     5.1 Ja, ga naar stap 3.
      *     5.2 Nee, ga naar stap 6.
      * 6. Is het einde van de ArrayList bereikt?
-     *     6.1 Is mvpTempCount hoger (of gelijk aan) dan mvpCount?
+     *     6.1 Is mvpTempCount hoger dan mvpCount?
      *         6.1.1 Ja, sla mvpTempCount op in mvpCount.
-     *             6.1.1.1 Sla de studentennaam op in mvp/concateneer het aan mvp.
+     *             6.1.1.1 Sla de studentennaam op in mvp.
      *         6.1.2 Nee, doe niks.
      *     6.2 Reset mvpTempCount.
-     *     6.2 Ga weer naar 1.
+     *     6.3 Reset mvpTemp.
+     *     6.4 Ga weer naar 1.
      *
      * @return student(en) met meest behaalde examens.
      */
@@ -329,7 +330,7 @@ public class Menu {
         // Toont alleen maar één persoon. Het kan zijn dat twee of meer personen
         // geslaagd zijn voor hetzelfde aantal examens, maar dat werd te complex (als dat als niet is),
         // dus heb ik dat maar opgegeven.
-        String deBeste = mvp + " is met " + mvpCount + " punten de beste.";
+        String deBeste = mvp + " is met " + mvpCount + " punt(en) de beste.";
         return deBeste;
     }
 
