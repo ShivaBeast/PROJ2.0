@@ -271,7 +271,7 @@ public class Menu {
      *     6.3 Reset mvpTemp.
      *     6.4 Ga weer naar 1.
      *
-     * @return student(en) met meest behaalde examens.
+     * @return student met meest behaalde examens.
      */
     public String studentMetMeesteVoldoendes() {
         // Maak een kopie van alle pogingen, zodat de originele onaangetast blijft.
