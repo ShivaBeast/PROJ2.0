@@ -1,11 +1,14 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Locale;
+import java.util.Scanner;
 
 public class Menu {
     private final Scanner READER = new Scanner(System.in);
 
     // Alle studenten.
-    private final ArrayList<Student> STUDENTENLIJST = new ArrayList<Student>();
-    
+    private ArrayList<Student> STUDENTENLIJST = new ArrayList<Student>();
+
     // Lijst met alle examens.
     private final ExamenVerzameling EXAMENVERZAMELING = new ExamenVerzameling();
     private final ArrayList<Examen> ALLEEXAMENS = EXAMENVERZAMELING.getAlleExamens();
@@ -42,10 +45,10 @@ public class Menu {
     public void getChoice(String keuze) {
         switch (keuze) {
             case "1":
-                showExamens();
+                System.out.println(showExamens());
                 break;
             case "2":
-                showSTUDENTENLIJST();
+                System.out.println(showStudentenLijst());
                 break;
             case "3":
                 studentInschrijven();
@@ -85,23 +88,26 @@ public class Menu {
 
     /**
      * Laat een lijst zien van alle examens die toegevoegd zijn aan het programma.
+     * @return alle examens
      */
-    public void showExamens() {
+    public String showExamens() {
+        String exams = "";
         for (Examen examen : ALLEEXAMENS) {
-            System.out.println(
-                    "[Vak: " + examen.getNaam() + ", " +
-                    "Aantal vragen: " + examen.getVragen().size() + "]"
-            );
+            exams += "[Vak: " + examen.getNaam() + ", " +
+                   "Aantal vragen: " + examen.getVragen().size() + "]\n";
         }
+        return exams;
     }
-
     /**
      * Laat een lijst zien van alle studenten in het programma.
+     * @return studentenlijst
      */
-    public void showSTUDENTENLIJST() {
+    public String showStudentenLijst() {
+        String students = "";
         for (int i = 0; i < STUDENTENLIJST.size(); i++) {
-            System.out.println("[" + (i+1) + "]" + " " + STUDENTENLIJST.get(i).getNaam() + " " + STUDENTENLIJST.get(i).getStudentenNummer());
+            students += "\n[" + (i+1) + "]" + " " + STUDENTENLIJST.get(i).getNaam() + " " + STUDENTENLIJST.get(i).getStudentenNummer();
         }
+        return students;
     }
 
     /**
@@ -120,7 +126,7 @@ public class Menu {
      */
     public void infoVoorExamenDoen() {
         // Toon alle beschikbare examens.
-        showExamens();
+        System.out.println(showExamens());
 
         // Vraag welke de student wil doen.
         System.out.print("Welk examen wil je doen? Type de naam in: ");
@@ -208,8 +214,8 @@ public class Menu {
      * Gebruiker kan zichzelf kiezen.
      */
     public void identiteitStudentKiezen() {
-        // Toon de lijst met alle ingeschreven studenten.
-        showSTUDENTENLIJST();
+        // Vervolgens, toon de lijst met alle ingeschreven studenten.
+        System.out.println(showStudentenLijst());
 
         // Student kan aan de hand van het nummertje voor hun naam zichzelf kiezen.
         System.out.print("Wie ben je? Voer het nummer voor je naam in: ");
@@ -275,7 +281,7 @@ public class Menu {
      */
     public String studentMetMeesteVoldoendes() {
         // Maak een kopie van alle pogingen, zodat de originele onaangetast blijft.
-        ArrayList<Poging> kopiePogingen = new ArrayList<Poging>(Poging.getPogingenVanStudenten());
+        ArrayList<Poging> kopiePogingen = new ArrayList<Poging>();
         kopiePogingen.addAll(Poging.getPogingenVanStudenten());
 
         // De huidige student waarvoor de loop het aantal geslaagde examens bijhoudt.
@@ -305,12 +311,6 @@ public class Menu {
                 }
             }
 
-            // Verwijder de huidige poging object,
-            // zodat als we later weer door de lijst gaan loopen,
-            // dat we geen rekening hoeven te houden met de huidige poging object.
-            // Zeg maar zoiets als "trial by elimination".
-            kopiePogingen.remove(vorigePoging);
-
             // Aangekomen bij het einde van de array?
             if (i == kopiePogingen.size() - 1) {
                 // Check of de het aantal geslaagde examens van deze student
@@ -324,8 +324,14 @@ public class Menu {
                 // Reset alles weer, en begin weer van voren af aan.
                 mvpTempCount = 0;
                 i = 0;
-                mvpTemp = kopiePogingen.get(0).getStudent().getNaam();
+                mvpTemp = poging.getStudent().getNaam();
             }
+
+            // Verwijder de huidige poging object,
+            // zodat als we later weer door de lijst gaan loopen,
+            // dat we geen rekening hoeven te houden met de huidige poging object.
+            // Zeg maar zoiets als "trial by elimination".
+            kopiePogingen.remove(vorigePoging);
         }
 
         // Toont alleen maar één persoon. Het kan zijn dat twee of meer personen
@@ -410,5 +416,13 @@ public class Menu {
             // Als de lijst leeg is, toon dit.
             System.out.println("Geen studenten om uit te schrijven.");
         }
+    }
+
+    /**
+     * Setter voor STUDENTENLIJST.
+     * @param studentenlijst een lijst van studenten
+     */
+    public void setStudentenLijst(ArrayList<Student> studentenlijst) {
+        STUDENTENLIJST = studentenlijst;
     }
 }

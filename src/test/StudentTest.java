@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-public class testCheckStudentNummerLength {
+public class StudentTest {
 
     @Test
     public void testCheckStudentNummerLength_InputZero_ReturnsFalse() {
