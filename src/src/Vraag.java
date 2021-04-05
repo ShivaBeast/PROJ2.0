@@ -6,18 +6,26 @@ public class Vraag {
     private int punten;
     private ArrayList<String> keuzes;
 
-    public Vraag() {
-        this("", "", 0);
-    }
-
-    public Vraag(String vraag, String antwoord, int punten){
+    /**
+     * Constructor voor een open vraag.
+     * @param vraag de vraag
+     * @param antwoord het antwoord
+     * @param punten aantal te behalen punten
+     */
+    public Vraag(String vraag, String antwoord, int punten) {
         this.vraag = vraag;
         this.antwoord = antwoord;
         this.punten = punten;
-
     }
 
-    public Vraag(String vraag, ArrayList<String> keuzes, String antwoord, int punten){
+    /**
+     * Constructor voor een meerkeuzevraag.
+     * @param vraag de vraag
+     * @param keuzes de opties
+     * @param antwoord het antwoord
+     * @param punten aantal te behalen punten
+     */
+    public Vraag(String vraag, ArrayList<String> keuzes, String antwoord, int punten) {
         this.keuzes = keuzes;
         this.vraag = vraag;
         this.antwoord = antwoord;
@@ -25,7 +33,18 @@ public class Vraag {
 
     }
 
-    public ArrayList<Vraag> vragen() {
+    /**
+     * Constructor zonder parameters.
+     */
+    public Vraag() {
+        this("", "", 0);
+    }
+
+    /**
+     * Methode om vragen mee te maken.
+     * @return 10 open vragen
+     */
+    public static ArrayList<Vraag> vragen() {
         ArrayList<Vraag> open = new ArrayList<>();
 
         open.add(new Vraag("Wat is het 3e planeet in ons zonnestelsel?", "Aarde", 10));
@@ -42,7 +61,11 @@ public class Vraag {
         return open;
     }
 
-    public ArrayList<Vraag> MCVragen() {
+    /**
+     * Methode om meerkeuzevragen mee te maken.
+     * @return 10 meerkeuze vragen
+     */
+    public static ArrayList<Vraag> MCVragen() {
         ArrayList<Vraag> mc = new ArrayList<>();
 
         mc.add(new Vraag("Hoeveel Megabytes is 1 Gigabyte?", opties("1000", "10", "100","1"), "A", 10));
@@ -59,7 +82,15 @@ public class Vraag {
         return mc;
     }
 
-    public ArrayList<String> opties(String A, String B, String C, String D) {
+    /**
+     * Hulpmethode voor MCVragen(), zodat er minder typewerk is.
+     * @param A optie A
+     * @param B optie B
+     * @param C optie C
+     * @param D optie D
+     * @return de vier opties
+     */
+    public static ArrayList<String> opties(String A, String B, String C, String D) {
         ArrayList<String> keuzes = new ArrayList<String>();
         keuzes.add("A. " + A);
         keuzes.add("B. " + B);
@@ -69,11 +100,27 @@ public class Vraag {
         return keuzes;
     }
 
+    /**
+     * Getter voor de vraag.
+     * @return de vraag
+     */
     public String getVraag() { return vraag; }
 
+    /**
+     * Getter voor het antwoord.
+     * @return het antwoord
+     */
     public String getAntwoord() { return antwoord; }
 
+    /**
+     * Getter voor de keuzes (bv. A, B, C, D).
+     * @return arraylist met keuzes
+     */
     public ArrayList<String> getKeuzes() { return keuzes; }
 
+    /**
+     * Getter voor de te behalen punten.
+     * @return aantal te behalen punten
+     */
     public int getPunten() { return punten; }
 }
