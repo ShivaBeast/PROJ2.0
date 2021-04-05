@@ -75,7 +75,7 @@ public class Vraag {
         mc.add(new Vraag( "Welke van de 4 personen is de rijkste man ter wereld?", opties("Elon Musk", "Bill Gates", "Jeff Bezos", "Mark Zuckerberg"), "C", 10));
         mc.add(new Vraag( "Welk land werd de 1e die wiet legaliseerde?", opties("Amerika", "Nederland", "Canada", "Singapore"), "C", 10));
         mc.add(new Vraag( "Welke programmeertaal wordt gebruikt voor het bouwen van een website?", opties("Java", "Python", "HTML/CSS", "C#"), "C", 10));
-        mc.add(new Vraag( "Welk land behoort niet tot Zuid-Amerika?", opties("Venezuela", "Colombia", "Chile", "Indian"), "D", 10));
+        mc.add(new Vraag( "Welk land behoort niet tot Zuid-Amerika?", opties("Venezuela", "Colombia", "Chile", "India"), "D", 10));
         mc.add(new Vraag( "Wie heeft de wereldrecord als de snelste man ter wereld?", opties("Florence Griffith-Joyner", "Usian Bolt", "Tyson Gay", "Mike Rodgers"), "B", 10));
         mc.add(new Vraag( "Hoe heet de zoon van god?",opties("Jezus Christus","Keanu Reeves","Penquinz0","Lucifer Morningstar"), "A", 10));
 
