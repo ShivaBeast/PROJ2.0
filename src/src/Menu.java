@@ -35,7 +35,7 @@ public class Menu {
     public void getChoice(String keuze) {
         switch (keuze) {
             case "1":
-                showExamens();
+                System.out.println(showExamens());
                 break;
             case "2":
                 System.out.println(showStudentenLijst());
@@ -74,13 +74,13 @@ public class Menu {
     /**
      * Laat een lijst zien van alle examens die toegevoegd zijn aan het programma.
      */
-    public void showExamens() {
+    public String showExamens() {
+        String exams = "";
         for (Examen examen : examenVerzameling.getAlleExamens()) {
-            System.out.println(
-                    "[Vak: " + examen.getNaam() + ", " +
-                    "Aantal vragen: " + examen.getVragen().size() + "]"
-            );
+            exams += "[Vak: " + examen.getNaam() + ", " +
+                   "Aantal vragen: " + examen.getVragen().size() + "]\n";
         }
+        return exams;
     }
 
     public void setStudentenLijst(ArrayList<Student> studentenLijst) {
@@ -101,7 +101,7 @@ public class Menu {
      */
     public void infoVoorExamenDoen() {
         // Toon alle beschikbare examens.
-        showExamens();
+        System.out.println(showExamens());
 
         // Vraag welke de student wil doen.
         System.out.print("Welk examen wil je doen? Type de naam in: ");
