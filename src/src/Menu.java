@@ -83,6 +83,7 @@ public class Menu {
         return exams;
     }
 
+    //setstudentenlijst
     public void setStudentenLijst(ArrayList<Student> studentenLijst) {
         this.studentenLijst = studentenLijst;
     }
