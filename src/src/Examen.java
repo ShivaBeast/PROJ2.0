@@ -6,8 +6,8 @@ public class Examen {
 
     /**
      * Constructor voor een examen object.
-     * @param naam - Naam van het examen.
-     * @param vragen - Een lijst met alle vragen in het examen.
+     * @param naam naam van het examen.
+     * @param vragen een lijst met alle vragen in het examen.
      */
     public Examen(String naam, ArrayList<Vraag> vragen) {
         this.naam = naam;
@@ -31,7 +31,7 @@ public class Examen {
 
     /**
      * Setter voor naam.
-     * @param naam - naam
+     * @param naam naam
      */
     public void setNaam(String naam) {
         this.naam = naam;
@@ -47,7 +47,7 @@ public class Examen {
 
     /**
      * Setter voor vragen.
-     * @param vragen - Een vragenlijst.
+     * @param vragen een vragenlijst.
      */
     public void setVragen(ArrayList<Vraag> vragen) {
         this.vragen = vragen;

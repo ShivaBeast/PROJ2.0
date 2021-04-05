@@ -1,22 +1,28 @@
 import java.util.Scanner;
 
 public class ExamenAdministratie {
-    private Menu menu = new Menu();
-    private Scanner reader = new Scanner(System.in);
+    private final Menu MENU = new Menu();
+    private final Scanner READER = new Scanner(System.in);
 
+    /**
+     * Hiermee wordt het hele programma gestart.
+     */
     public void start() {
-        menu.showMenu();
-        String keuze = reader.nextLine();
+        MENU.showMenu();
+        String keuze = READER.nextLine();
 
         while (!keuze.equals("8")) {
-            menu.getChoice(keuze);
+            MENU.getChoice(keuze);
             System.out.print("\nVoer je keuze in: ");
-            keuze = reader.nextLine();
+            keuze = READER.nextLine();
         }
 
         stop();
     }
 
+    /**
+     * Print alleen een berichtje uit bij het stoppen van dit programma.
+     */
     private void stop() {
         System.out.println("Exit");
     }

@@ -1,25 +1,21 @@
 import java.util.ArrayList;
 
 public class ExamenVerzameling {
-    private ArrayList<Examen> alleExamens = new ArrayList<Examen>();
-    private Vraag vragen = new Vraag();
+    private final ArrayList<Examen> ALLEEXAMENS = new ArrayList<Examen>();
 
     /**
-     * Bij het aanmaken van een instance, worden alvast de bestaande examens toegevoegd.
+     * Voeg de twee bestaande examens toe aan de arraylist.
      */
     public ExamenVerzameling() {
-        // Voeg de bestaande examens toe aan de lijst.
-        alleExamens.add(new Examen("Examen 1", vragen.vragen()));
-        alleExamens.add(new Examen("Examen 2", vragen.MCVragen()));
+        ALLEEXAMENS.add(new Examen("Examen 1", Vraag.vragen()));
+        ALLEEXAMENS.add(new Examen("Examen 2", Vraag.MCVragen()));
     }
 
     /**
-     * Getter voor alle examens in de "database".
-     *
-     * @return ArrayList<Examen> - Een ArrayList dat alle examens bevat.
+     * Getter voor alle examens.
+     * @return arraylist met alle examens.
      */
     public ArrayList<Examen> getAlleExamens() {
-        return alleExamens;
+        return ALLEEXAMENS;
     }
-
 }
