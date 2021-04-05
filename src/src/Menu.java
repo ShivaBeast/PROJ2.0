@@ -276,6 +276,7 @@ public class Menu {
     public String studentMetMeesteVoldoendes() {
         // Maak een kopie van alle pogingen, zodat de originele onaangetast blijft.
         ArrayList<Poging> kopiePogingen = new ArrayList<Poging>(Poging.getPogingenVanStudenten());
+        kopiePogingen.addAll(Poging.getPogingenVanStudenten());
 
         // De huidige student waarvoor de loop het aantal geslaagde examens bijhoudt.
         String mvpTemp = kopiePogingen.get(0).getStudent().getNaam();
@@ -330,8 +331,7 @@ public class Menu {
         // Toont alleen maar één persoon. Het kan zijn dat twee of meer personen
         // geslaagd zijn voor hetzelfde aantal examens, maar dat werd te complex (als dat als niet is),
         // dus heb ik dat maar opgegeven.
-        String deBeste = mvp + " is met " + mvpCount + " punt(en) de beste.";
-        return deBeste;
+        return mvp + " is met " + mvpCount + " punt(en) de beste.";
     }
 
     /**
