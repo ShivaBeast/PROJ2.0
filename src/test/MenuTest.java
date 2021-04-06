@@ -1,19 +1,9 @@
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Scanner;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class MenuTest {
-
-
     @Test
     void testShowStudentenLijst() {
         Menu menu1 = new Menu();
@@ -24,9 +14,9 @@ class MenuTest {
         studentenLijst.add(student1);
         studentenLijst.add(student2);
 
-        menu1.setStudentenLijst(studentenLijst);
+        menu1.setStudentenlijst(studentenLijst);
         Assertions.assertEquals
-                ("\n[1] Wishal Toekoen 19105843\n" + "[2] Rowin Hartog 20581919", menu1.showStudentenLijst());
+                ("\n[1] Wishal Toekoen 19105843\n" + "[2] Rowin Hartog 20581919", menu1.showStudentenlijst());
 
     }
 
@@ -45,7 +35,7 @@ class MenuTest {
 
         studentenLijst.add(student);
         studentenLijst.add(student2);
-        menu1.setStudentenLijst(studentenLijst);
+        menu1.setStudentenlijst(studentenLijst);
 
         Assertions.assertTrue(menu1.isStudentenNummerUniek(student2.getStudentenNummer()));
     }
@@ -54,6 +44,15 @@ class MenuTest {
     public void testShowExamens() {
         Menu menu1 = new Menu();
         Assertions.assertEquals("[Vak: Examen 1, Aantal vragen: 10]\n" +
-                "[Vak: Examen 2, Aantal vragen: 10]\n", menu1.showExamens());
+                "[Vak: Examen 2, Aantal vragen: 10]", menu1.showExamens());
+    }
+
+    @Test
+    public void testNieuwePoging() {
+        Menu menu = new Menu();
+        Poging poging = menu.nieuwePoging();
+
+        Assertions.assertNotNull(poging);
+        Assertions.assertTrue(poging instanceof Poging);
     }
 }

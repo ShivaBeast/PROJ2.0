@@ -1,12 +1,9 @@
-import java.util.ArrayList;
-
 public class Poging {
     private boolean geslaagd;
     private final int VOLDOENDEBIJ = 55;
     private int behaaldePunten;
     private Examen examen;
     private Student student;
-    private static ArrayList<Poging> pogingenVanStudenten = new ArrayList<Poging>();
 
     /**
      * Constructor.
@@ -95,29 +92,5 @@ public class Poging {
      */
     public void setStudent(Student student) {
         this.student = student;
-    }
-
-    /**
-     * Getter voor alle pogingen.
-     * @return alle pogingen in een arraylist
-     */
-    public static ArrayList<Poging> getPogingenVanStudenten() {
-        return pogingenVanStudenten;
-    }
-
-    /**
-     * Setter voor pogingenVanStudenten.
-     * @param pogingenVanStudenten een arraylist van pogingen
-     */
-    public static void setPogingenVanStudenten(ArrayList<Poging> pogingenVanStudenten) {
-        Poging.pogingenVanStudenten = pogingenVanStudenten;
-    }
-
-    /**
-     * Deze methode voegt een poging object toe aan de arraylist van alle pogingen.
-     * @param poging een poging
-     */
-    public static void voegToeAanPogingen(Poging poging) {
-        pogingenVanStudenten.add(poging);
     }
 }

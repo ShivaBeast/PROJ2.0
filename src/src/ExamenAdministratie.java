@@ -24,6 +24,6 @@ public class ExamenAdministratie {
      * Print alleen een berichtje uit bij het stoppen van dit programma.
      */
     private void stop() {
-        System.out.println("Exit");
+        System.out.println("\nExit");
     }
 }

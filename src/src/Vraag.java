@@ -30,7 +30,6 @@ public class Vraag {
         this.vraag = vraag;
         this.antwoord = antwoord;
         this.punten = punten;
-
     }
 
     /**
@@ -48,7 +47,7 @@ public class Vraag {
         ArrayList<Vraag> open = new ArrayList<>();
 
         open.add(new Vraag("Wat is het 3e planeet in ons zonnestelsel?", "Aarde", 10));
-        open.add(new Vraag("Hoe heet de koning van Nederland?", "Willem Alexander", 10));
+        open.add(new Vraag("Hoe heet de koning van Nederland?", "Willem-Alexander", 10));
         open.add(new Vraag("Wie was de 1e gekleurde president van Amerika?", "Barack Obama", 10));
         open.add(new Vraag("Welk land heeft de meeste bewoners van heel de wereld?", "China", 10));
         open.add(new Vraag("Welk land behoort sinds 2020 niet meer tot de EU?", "Het Verenigd Koninkrijk", 10));
@@ -75,8 +74,8 @@ public class Vraag {
         mc.add(new Vraag( "Welke van de 4 personen is de rijkste man ter wereld?", opties("Elon Musk", "Bill Gates", "Jeff Bezos", "Mark Zuckerberg"), "C", 10));
         mc.add(new Vraag( "Welk land werd de 1e die wiet legaliseerde?", opties("Amerika", "Nederland", "Canada", "Singapore"), "C", 10));
         mc.add(new Vraag( "Welke programmeertaal wordt gebruikt voor het bouwen van een website?", opties("Java", "Python", "HTML/CSS", "C#"), "C", 10));
-        mc.add(new Vraag( "Welk land behoort niet tot Zuid-Amerika?", opties("Venezuela", "Colombia", "Chile", "Indian"), "D", 10));
-        mc.add(new Vraag( "Wie heeft de wereldrecord als de snelste man ter wereld?", opties("Florence Griffith-Joyner", "Usian Bolt", "Tyson Gay", "Mike Rodgers"), "B", 10));
+        mc.add(new Vraag( "Welk land behoort niet tot Zuid-Amerika?", opties("Venezuela", "Colombia", "Chile", "India"), "D", 10));
+        mc.add(new Vraag( "Wie heeft de wereldrecord als de snelste man ter wereld?", opties("Florence Griffith-Joyner", "Usain Bolt", "Tyson Gay", "Mike Rodgers"), "B", 10));
         mc.add(new Vraag( "Hoe heet de zoon van god?",opties("Jezus Christus","Keanu Reeves","Penquinz0","Lucifer Morningstar"), "A", 10));
 
         return mc;
@@ -91,11 +90,11 @@ public class Vraag {
      * @return de vier opties
      */
     public static ArrayList<String> opties(String A, String B, String C, String D) {
-        ArrayList<String> keuzes = new ArrayList<String>();
+        ArrayList<String> keuzes = new ArrayList<>();
         keuzes.add("A. " + A);
         keuzes.add("B. " + B);
-        keuzes.add("C " + C);
-        keuzes.add("D " + D);
+        keuzes.add("C. " + C);
+        keuzes.add("D. " + D);
 
         return keuzes;
     }

@@ -7,11 +7,11 @@ public class Menu {
     private final Scanner READER = new Scanner(System.in);
 
     // Alle studenten.
-    private ArrayList<Student> STUDENTENLIJST = new ArrayList<Student>();
+    private ArrayList<Student> studentenlijst = new ArrayList<>();
 
     // Lijst met alle examens.
     private final ExamenVerzameling EXAMENVERZAMELING = new ExamenVerzameling();
-    private final ArrayList<Examen> ALLEEXAMENS = EXAMENVERZAMELING.getAlleExamens();
+    private final ArrayList<Examen> ALLE_EXAMENS = EXAMENVERZAMELING.getAlleExamens();
 
     private Examen afTeNemenExamen = new Examen();
     private Student examenNemer = new Student();
@@ -45,10 +45,10 @@ public class Menu {
     public void getChoice(String keuze) {
         switch (keuze) {
             case "1":
-                System.out.println(showExamens());
+                System.out.println("\n" + showExamens());
                 break;
             case "2":
-                System.out.println(showStudentenLijst());
+                System.out.println(showStudentenlijst());
                 break;
             case "3":
                 studentInschrijven();
@@ -60,16 +60,12 @@ public class Menu {
                 studentGeslaagdVoor();
                 break;
             case "6":
-                if (Poging.getPogingenVanStudenten().isEmpty()) {
-                    System.out.println("Er is nog niemand.");
-                } else {
-                    System.out.println(studentMetMeesteVoldoendes());
-                }
+                studentMetMeesteVoldoendes();
                 break;
             case "7":
                 // Als er geen studenten ingeschreven zijn, geef de optie om in te schrijven.
-                if (STUDENTENLIJST.isEmpty()) {
-                    System.out.print("Er zijn geen studenten! Wil je je inschrijven? (Ja/Nee) ");
+                if (studentenlijst.isEmpty()) {
+                    System.out.print("\nEr zijn geen studenten! Wil je je inschrijven? (Ja/Nee) ");
                     String inschrijven = READER.nextLine().toLowerCase(Locale.ROOT);
                     if (inschrijven.equals("ja")) {
                         studentInschrijven();
@@ -92,20 +88,26 @@ public class Menu {
      */
     public String showExamens() {
         String exams = "";
-        for (Examen examen : ALLEEXAMENS) {
-            exams += "[Vak: " + examen.getNaam() + ", " +
-                   "Aantal vragen: " + examen.getVragen().size() + "]\n";
+        for (int i = 0; i < ALLE_EXAMENS.size(); i++) {
+            Examen examen = ALLE_EXAMENS.get(i);
+
+            if (i == ALLE_EXAMENS.size() - 1) {
+                exams += "[Vak: " + examen.getNaam() + ", " + "Aantal vragen: " + examen.getVragen().size() + "]";
+            } else {
+                exams += "[Vak: " + examen.getNaam() + ", " + "Aantal vragen: " + examen.getVragen().size() + "]\n";
+            }
         }
         return exams;
     }
+
     /**
      * Laat een lijst zien van alle studenten in het programma.
      * @return studentenlijst
      */
-    public String showStudentenLijst() {
+    public String showStudentenlijst() {
         String students = "";
-        for (int i = 0; i < STUDENTENLIJST.size(); i++) {
-            students += "\n[" + (i+1) + "]" + " " + STUDENTENLIJST.get(i).getNaam() + " " + STUDENTENLIJST.get(i).getStudentenNummer();
+        for (int i = 0; i < studentenlijst.size(); i++) {
+            students += "\n[" + (i+1) + "]" + " " + studentenlijst.get(i).getNaam() + " " + studentenlijst.get(i).getStudentenNummer();
         }
         return students;
     }
@@ -126,10 +128,10 @@ public class Menu {
      */
     public void infoVoorExamenDoen() {
         // Toon alle beschikbare examens.
-        System.out.println(showExamens());
+        System.out.println("\n" + showExamens());
 
         // Vraag welke de student wil doen.
-        System.out.print("Welk examen wil je doen? Type de naam in: ");
+        System.out.print("\nWelk examen wil je doen? Type de naam in: ");
         String examenKeuze = READER.nextLine();
 
         // Als het examen niet aanwezig is, wordt nog een keer om een invoer gevraagd.
@@ -175,6 +177,7 @@ public class Menu {
             // Gebruiker geeft antwoord.
             System.out.print("Jouw antwoord: ");
             String antwoord = READER.nextLine();
+            System.out.println();
 
             // Als een antwoord goed is, tel het op bij behaalde punten.
             if (vraag.getAntwoord().equals(antwoord)) {
@@ -191,7 +194,8 @@ public class Menu {
         }
         poging.setBehaaldePunten(behaaldePunten);
 
-        Poging.voegToeAanPogingen(poging);
+        examenNemer.voegToeAanPogingen(poging);
+        afTeNemenExamen.voegToeAanPogingen(poging);
     }
 
     /**
@@ -201,7 +205,7 @@ public class Menu {
      */
     public boolean isExamenKeuzeAanwezig(String examenKeuze) {
         boolean r = false;
-        for (Examen examen : ALLEEXAMENS) {
+        for (Examen examen : ALLE_EXAMENS) {
             if (examen.getNaam().equals(examenKeuze)) {
                 afTeNemenExamen = examen;
                 r = true;
@@ -214,130 +218,93 @@ public class Menu {
      * Gebruiker kan zichzelf kiezen.
      */
     public void identiteitStudentKiezen() {
-        // Vervolgens, toon de lijst met alle ingeschreven studenten.
-        System.out.println(showStudentenLijst());
+        // Toon de lijst met alle ingeschreven studenten.
+        System.out.println(showStudentenlijst());
 
         // Student kan aan de hand van het nummertje voor hun naam zichzelf kiezen.
+        System.out.println();
         System.out.print("Wie ben je? Voer het nummer voor je naam in: ");
         int studentKeuze = READER.nextInt();
         READER.nextLine();
+        System.out.println();
 
         // Als het nummer te laag of te hoog is, vraag opnieuw om invoer.
-        while (studentKeuze > STUDENTENLIJST.size() || studentKeuze <= 0) {
+        while (studentKeuze > studentenlijst.size() || studentKeuze <= 0) {
             System.out.print("Ongeldige keuze, voer het nog een keer in: ");
             studentKeuze = READER.nextInt();
             READER.nextLine();
         }
 
-        // Selecteer de student uit de lijst.
-        examenNemer = STUDENTENLIJST.get(studentKeuze - 1);
+        // Selecteer de student uit de lijst en sla hem/haar op in examenNemer.
+        examenNemer = studentenlijst.get(studentKeuze - 1);
     }
 
     /**
      * Laat zien waar de student voor geslaagd is.
+     * @returns examens waarvoor de student geslaagd is
      */
     public void studentGeslaagdVoor() {
+        // Laat de gebruiker eerst zijn/haar eigen profiel kiezen.
         identiteitStudentKiezen();
 
-        System.out.println("Je bent geslaagd voor: ");
-        for (Poging p : Poging.getPogingenVanStudenten()) {
-            if (p.getStudent().equals(examenNemer) && p.getGeslaagd()) {
-                System.out.println(p.getExamen().getNaam() + " met " + p.getBehaaldePunten() + " punten.");
+        ArrayList<Poging> pogingenVanStudent = examenNemer.getPogingen();
+
+        String geslaagdVoor = "";
+        if (pogingenVanStudent.isEmpty()) {
+            geslaagdVoor = "Je hebt nog geen examens gemaakt.";
+        } else {
+            geslaagdVoor = "Je bent geslaagd voor:\n";
+
+            for (int i = 0; i < pogingenVanStudent.size(); i++) {
+                Poging poging = pogingenVanStudent.get(i);
+
+                if (poging.getGeslaagd()) {
+                    if (i == pogingenVanStudent.size() - 1) {
+                        geslaagdVoor += "\t- " + poging.getExamen().getNaam() + " met " + poging.getBehaaldePunten() + " punten";
+                    } else {
+                        geslaagdVoor += "\t- " + poging.getExamen().getNaam() + " met " + poging.getBehaaldePunten() + " punten\n";
+                    }
+                }
             }
         }
+
+        System.out.println(geslaagdVoor);
     }
 
     /**
-     * Deze methode laat zien, welke student de meeste examens heeft gehaald.
-     *
-     * Algoritme:
-     * 0. Maak een kopie van pogingenVanStudenten.
-     *     0.1 Maak de volgende variabelen aan.
-     *         0.1.1 mvpTemp: String
-     *         0.1.2 mvp: String
-     *         0.1.3 mvpTempCount: int
-     *         0.1.4 mvpCount: int
-     *         0.1.5 vorigePoging: poging
-     * 1. Selecteer een poging object uit de ArrayList en sla deze op in vorigePoging.
-     * 2. Haal de naam van de bijbehorende student op en sla deze op in mvpTemp.
-     * 3. Is de instance variabele "geslaagd" van poging true?
-     *     3.1 Ja, tel dan 1 op bij mvpTempCount.
-     *     3.2 Nee, doe niets.
-     * 4. Verwijder poging van vorigePoging uit de ArrayList.
-     *     4.1 Selecteer de volgende object uit de ArrayList.
-     * 5. Haal de naam van de bijbehorende student op. Is deze hetzelfde als in mvpTemp?
-     *     5.1 Ja, ga naar stap 3.
-     *     5.2 Nee, ga naar stap 6.
-     * 6. Is het einde van de ArrayList bereikt?
-     *     6.1 Is mvpTempCount hoger dan mvpCount?
-     *         6.1.1 Ja, sla mvpTempCount op in mvpCount.
-     *             6.1.1.1 Sla de studentennaam op in mvp.
-     *         6.1.2 Nee, doe niks.
-     *     6.2 Reset mvpTempCount.
-     *     6.3 Reset mvpTemp.
-     *     6.4 Ga weer naar 1.
-     *
-     * @return student met meest behaalde examens.
+     * Laat de student met de meeste geslaagde examens zien.
+     * @return naam van de student met aantal geslaagde examens.
      */
-    public String studentMetMeesteVoldoendes() {
-        // Maak een kopie van alle pogingen, zodat de originele onaangetast blijft.
-        ArrayList<Poging> kopiePogingen = new ArrayList<Poging>();
-        kopiePogingen.addAll(Poging.getPogingenVanStudenten());
-
-        // De huidige student waarvoor de loop het aantal geslaagde examens bijhoudt.
-        String mvpTemp = kopiePogingen.get(0).getStudent().getNaam();
-
-        // De uiteindelijke "MVP".
+    public void studentMetMeesteVoldoendes() {
+        int tempGeslaagdTeller = 0;
+        int geslaagdTeller = 0;
         String mvp = "";
 
-        // Tijdelijke counter.
-        int mvpTempCount = 0;
+        // Ga elke student uit de lijst een voor een af.
+        for (Student student : studentenlijst) {
+            ArrayList<Poging> pogingen = student.getPogingen();
 
-        // De hoogste score komt hier te staan.
-        int mvpCount = 0;
-
-        Poging vorigePoging;
-
-        for (int i = 0; i < kopiePogingen.size(); i++) {
-            Poging poging = kopiePogingen.get(i);
-            vorigePoging = poging;
-
-            // Als de naam van het huidige student object overeenkomt,
-            // met wat er in mvpTemp staat, dan
-            if (poging.getStudent().getNaam().equals(mvpTemp)) {
-                // check of hij/zij geslaagd is.
-                if (poging.getGeslaagd()) {
-                    mvpTempCount++;
+            // Als een student pogingen heeft gedaan,
+            if (!pogingen.isEmpty()) {
+                for (Poging poging : pogingen) {
+                    // kijk dan of een poging geslaagd is,
+                    // zo ja, tel het op bij tempGeslaagdTeller.
+                    if (poging.getGeslaagd()) { tempGeslaagdTeller++; }
                 }
             }
 
-            // Aangekomen bij het einde van de array?
-            if (i == kopiePogingen.size() - 1) {
-                // Check of de het aantal geslaagde examens van deze student
-                // hoger is dan wat er in de mvpCount staat.
-                if (mvpTempCount >= mvpCount) {
-                    mvpCount = mvpTempCount;
-
-                    // Zijn/haar naam wordt dan ook in mvp gezet.
-                    mvp = mvpTemp;
-                }
-                // Reset alles weer, en begin weer van voren af aan.
-                mvpTempCount = 0;
-                i = 0;
-                mvpTemp = poging.getStudent().getNaam();
+            // Vergelijk nu wat in tempGeslaagdTeller staat met het getal in geslaagdTeller.
+            // Als het hoger is dan geslaagdTeller, vervang het.
+            // En sla de naam op van die student.
+            if (tempGeslaagdTeller > geslaagdTeller) {
+                geslaagdTeller = tempGeslaagdTeller;
+                mvp = student.getNaam() + " met " + geslaagdTeller + " geslaagde examens.";
             }
 
-            // Verwijder de huidige poging object,
-            // zodat als we later weer door de lijst gaan loopen,
-            // dat we geen rekening hoeven te houden met de huidige poging object.
-            // Zeg maar zoiets als "trial by elimination".
-            kopiePogingen.remove(vorigePoging);
+            tempGeslaagdTeller = 0;
         }
 
-        // Toont alleen maar één persoon. Het kan zijn dat twee of meer personen
-        // geslaagd zijn voor hetzelfde aantal examens, maar dat werd te complex (als dat als niet is),
-        // dus heb ik dat maar opgegeven.
-        return mvp + " is met " + mvpCount + " punt(en) de beste.";
+        System.out.println(mvp);
     }
 
     /**
@@ -346,7 +313,7 @@ public class Menu {
      */
     public void studentInschrijven() {
         // Vraag om de naam.
-        System.out.print("Vul jouw naam in: ");
+        System.out.print("\nVul jouw naam in: ");
 
         // Haal de whitespaces weg voor en na de naam.
         String studentenNaam = READER.nextLine().trim();
@@ -372,9 +339,9 @@ public class Menu {
             studentenNummer = READER.nextLine().trim();
         }
 
-        // Maak een nieuw studenten object aan en voeg het toe aan de STUDENTENLIJST.
+        // Maak een nieuw studenten object aan en voeg het toe aan de studentenlijst.
         Student student = new Student(studentenNaam, studentenNummer);
-        STUDENTENLIJST.add(student);
+        studentenlijst.add(student);
     }
 
     /**
@@ -384,7 +351,7 @@ public class Menu {
      */
     public boolean isStudentenNummerUniek(String studentenNummer) {
         boolean isUniek = false;
-        for (Student student : STUDENTENLIJST) {
+        for (Student student : studentenlijst) {
             if (student.getStudentenNummer().equals(studentenNummer)) {
                 isUniek = true;
                 break;
@@ -398,13 +365,13 @@ public class Menu {
      * Gebruiker kan op naam zich/haarzelf uitschrijven.
      */
     public void studentUitschrijven() {
-        if (STUDENTENLIJST.size() != 0) {
+        if (studentenlijst.size() != 0) {
             // Als de lijst niet leeg is, vraag om input.
             System.out.print("Vul jouw naam in: ");
             String studentenNaam = READER.nextLine();
 
             // Student wordt verwijderd met een "Predicative" (iets met logica).
-            if (STUDENTENLIJST.removeIf(student -> student.getNaam().equals(studentenNaam))) {
+            if (studentenlijst.removeIf(student -> student.getNaam().equals(studentenNaam))) {
                 System.out.println("Succesvol uitgeschreven.");
             } else {
                 // Methode roept zichzelf nog een keer aan, als er wat fout ging.
@@ -419,10 +386,10 @@ public class Menu {
     }
 
     /**
-     * Setter voor STUDENTENLIJST.
+     * Setter voor studentenlijst.
      * @param studentenlijst een lijst van studenten
      */
-    public void setStudentenLijst(ArrayList<Student> studentenlijst) {
-        STUDENTENLIJST = studentenlijst;
+    public void setStudentenlijst(ArrayList<Student> studentenlijst) {
+        this.studentenlijst = studentenlijst;
     }
 }
